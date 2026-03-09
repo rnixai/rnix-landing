@@ -51,23 +51,23 @@ export default function Hero() {
               </a>
             </div>
 
-            <div className="flex items-center gap-6 text-sm text-midnight-400">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-midnight-400">
               <div className="flex items-center gap-2">
-                <div className="w-1 h-1 rounded-full bg-emerald-500" />
+                <div className="w-1 h-1 rounded-full bg-emerald-500 flex-shrink-0" />
                 Zero dependencies
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-1 h-1 rounded-full bg-emerald-500" />
+                <div className="w-1 h-1 rounded-full bg-emerald-500 flex-shrink-0" />
                 Single binary
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-1 h-1 rounded-full bg-emerald-500" />
+                <div className="w-1 h-1 rounded-full bg-emerald-500 flex-shrink-0" />
                 45 syscalls
               </div>
             </div>
           </div>
 
-          <div className="lg:translate-x-4">
+          <div className="lg:translate-x-4 min-w-0">
             <TerminalDemo />
           </div>
         </div>

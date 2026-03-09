@@ -71,14 +71,14 @@ export default function ArchitectureSection() {
               {LAYERS.map((layer) => (
                 <div
                   key={layer.label}
-                  className={`border rounded-xl px-5 py-4 transition-colors ${layer.color} ${
+                  className={`border rounded-xl px-3 sm:px-5 py-3 sm:py-4 transition-colors ${layer.color} ${
                     layer.highlight ? 'ring-1 ring-cyan-500/20' : ''
                   }`}
                 >
                   <div className={`font-semibold text-sm ${layer.textColor}`}>
                     {layer.label}
                   </div>
-                  <div className="text-xs text-midnight-500 font-mono mt-1">
+                  <div className="text-[10px] sm:text-xs text-midnight-500 font-mono mt-1 break-all sm:break-normal">
                     {layer.desc}
                   </div>
                 </div>

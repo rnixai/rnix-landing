@@ -20,10 +20,19 @@ const COMPARISON: CompRow[] = [
   { feature: 'Zero-dependency binary', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
 ];
 
+const COMPETITORS = ['LangGraph', 'AutoGen', 'CrewAI'] as const;
+
 function StatusIcon({ status }: { status: 'yes' | 'no' | 'partial' }) {
   if (status === 'yes') return <Check className="w-4 h-4 text-emerald-400" />;
   if (status === 'partial') return <Minus className="w-4 h-4 text-amber-400" />;
   return <X className="w-4 h-4 text-midnight-600" />;
+}
+
+
+function getCompetitorStatus(row: CompRow, name: string): 'yes' | 'no' | 'partial' {
+  if (name === 'LangGraph') return row.langGraph;
+  if (name === 'AutoGen') return row.autoGen;
+  return row.crewAI;
 }
 
 export default function ComparisonSection() {
@@ -45,7 +54,7 @@ export default function ComparisonSection() {
         </div>
 
         <div
-          className={`glass-card overflow-hidden ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+          className={`hidden sm:block glass-card overflow-hidden ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
         >
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px]">
@@ -76,7 +85,7 @@ export default function ComparisonSection() {
                       i % 2 === 0 ? '' : 'bg-midnight-900/10'
                     }`}
                   >
-                    <td className="text-sm text-midnight-300 py-3.5 px-6 font-mono text-xs">
+                    <td className="text-midnight-300 py-3.5 px-6 font-mono text-xs">
                       {row.feature}
                     </td>
                     <td className="text-center py-3.5 px-4 bg-cyan-500/5">
@@ -113,6 +122,39 @@ export default function ComparisonSection() {
             </div>
             <div className="flex items-center gap-1.5">
               <X className="w-3.5 h-3.5 text-midnight-600" /> Not available
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`sm:hidden flex flex-col gap-3 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+        >
+          {COMPARISON.map((row) => (
+            <div key={row.feature} className="glass-card p-4">
+              <div className="text-xs font-mono text-midnight-200 mb-3">{row.feature}</div>
+              <div className="grid grid-cols-4 gap-2">
+                <div className="flex flex-col items-center gap-1">
+                  <StatusIcon status={row.rnix} />
+                  <span className="text-[10px] font-semibold text-cyan-400">Rnix</span>
+                </div>
+                {COMPETITORS.map((name) => (
+                  <div key={name} className="flex flex-col items-center gap-1">
+                    <StatusIcon status={getCompetitorStatus(row, name)} />
+                    <span className="text-[10px] text-midnight-500">{name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div className="flex items-center justify-center gap-4 pt-2 text-[10px] text-midnight-500">
+            <div className="flex items-center gap-1">
+              <Check className="w-3 h-3 text-emerald-400" /> Native
+            </div>
+            <div className="flex items-center gap-1">
+              <Minus className="w-3 h-3 text-amber-400" /> Partial
+            </div>
+            <div className="flex items-center gap-1">
+              <X className="w-3 h-3 text-midnight-600" /> None
             </div>
           </div>
         </div>

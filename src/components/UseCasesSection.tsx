@@ -104,7 +104,7 @@ export default function UseCasesSection() {
             isInView ? 'animate-fade-in' : 'opacity-0'
           }`}
         >
-          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
+          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
             {USE_CASES.map((uc) => {
               const Icon = uc.icon;
               const isActive = uc.id === activeCase;
@@ -112,7 +112,7 @@ export default function UseCasesSection() {
                 <button
                   key={uc.id}
                   onClick={() => setActiveCase(uc.id)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 min-w-[200px] lg:min-w-0 ${
+                  className={`flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl text-left transition-all duration-200 min-w-[180px] sm:min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink ${
                     isActive
                       ? 'bg-midnight-800/80 border border-cyan-700/30 text-white'
                       : 'border border-transparent text-midnight-400 hover:text-midnight-200 hover:bg-midnight-900/40'
@@ -129,13 +129,13 @@ export default function UseCasesSection() {
             })}
           </div>
 
-          <div className="glass-card p-6 lg:p-8">
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <h3 className="text-xl font-bold text-white mb-1">{current.title}</h3>
-                <p className="text-sm text-midnight-400">{current.persona} / {current.role}</p>
+          <div className="glass-card p-4 sm:p-6 lg:p-8 min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-6">
+              <div className="min-w-0">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{current.title}</h3>
+                <p className="text-xs sm:text-sm text-midnight-400">{current.persona} / {current.role}</p>
               </div>
-              <span className="text-sm font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-lg whitespace-nowrap">
+              <span className="text-xs sm:text-sm font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-lg whitespace-nowrap self-start">
                 {current.highlight}
               </span>
             </div>
@@ -160,7 +160,7 @@ export default function UseCasesSection() {
                 </div>
                 <span className="text-[10px] text-midnight-600 font-mono ml-2">terminal</span>
               </div>
-              <div className="p-4 font-mono text-xs leading-5">
+              <div className="p-3 sm:p-4 font-mono text-[10px] sm:text-xs leading-5 overflow-x-auto">
                 {current.terminal.map((line, i) => (
                   <div
                     key={i}

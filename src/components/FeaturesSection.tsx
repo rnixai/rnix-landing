@@ -90,7 +90,7 @@ export default function FeaturesSection() {
             return (
               <div
                 key={feature.title}
-                className={`glass-card-hover p-6 flex flex-col ${
+                className={`glass-card-hover p-6 flex flex-col min-w-0 ${
                   isInView ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${i * 100}ms` }}
@@ -111,7 +111,7 @@ export default function FeaturesSection() {
                   {feature.description}
                 </p>
 
-                <div className="bg-midnight-950/80 border border-midnight-800/50 rounded-lg p-3.5 font-mono text-xs leading-5 text-midnight-300 overflow-x-auto whitespace-pre">
+                <div className="bg-midnight-950/80 border border-midnight-800/50 rounded-lg p-3.5 font-mono text-[10px] sm:text-xs leading-5 text-midnight-300 overflow-x-auto whitespace-pre min-w-0">
                   {feature.code}
                 </div>
               </div>

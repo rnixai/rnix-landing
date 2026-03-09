@@ -85,7 +85,7 @@ export default function TerminalDemo() {
           </button>
         )}
       </div>
-      <div className="p-4 sm:p-5 font-mono text-[13px] leading-6 min-h-[360px] sm:min-h-[420px] overflow-x-auto">
+      <div className="p-3 sm:p-5 font-mono text-[10px] sm:text-[13px] leading-5 sm:leading-6 min-h-[300px] sm:min-h-[420px] overflow-x-auto">
         {STRACE_DEMO.slice(0, visibleLines).map((line, i) => (
           <div
             key={i}

@@ -76,18 +76,18 @@ export default function GetStartedSection() {
           {STEPS.map((item, i) => (
             <div
               key={item.step}
-              className={`flex gap-5 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+              className={`flex gap-3 sm:gap-5 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
               style={{ animationDelay: `${i * 150}ms` }}
             >
               <div className="flex flex-col items-center flex-shrink-0">
-                <div className="w-10 h-10 rounded-full bg-cyan-600 flex items-center justify-center text-sm font-bold text-white">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-600 flex items-center justify-center text-xs sm:text-sm font-bold text-white">
                   {item.step}
                 </div>
                 {i < STEPS.length - 1 && (
                   <div className="w-px flex-1 bg-midnight-800/60 my-2" />
                 )}
               </div>
-              <div className="flex-1 pb-2">
+              <div className="flex-1 min-w-0 pb-2">
                 <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
                 <p className="text-sm text-midnight-400 mb-4">{item.desc}</p>
                 <div className="relative terminal-window">
@@ -98,7 +98,7 @@ export default function GetStartedSection() {
                       <div className="w-2 h-2 rounded-full bg-green-500/60" />
                     </div>
                   </div>
-                  <div className="p-4 font-mono text-xs leading-5 text-cyan-300 overflow-x-auto whitespace-pre">
+                  <div className="p-3 sm:p-4 font-mono text-[10px] sm:text-xs leading-5 text-cyan-300 overflow-x-auto whitespace-pre">
                     {item.code}
                   </div>
                   <CopyButton text={item.code} />
