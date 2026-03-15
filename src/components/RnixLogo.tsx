@@ -12,7 +12,10 @@ export default function RnixLogo({ className = '', size = 32 }: RnixLogoProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      role="img"
+      aria-labelledby="rnix-logo-title"
     >
+      <title id="rnix-logo-title">Rnix Logo</title>
       <rect width="32" height="32" rx="8" fill="url(#rnix-bg)" />
 
       <circle cx="16" cy="9" r="2.5" fill="url(#rnix-node)" />

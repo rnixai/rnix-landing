@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface TerminalLine {
   text: string;
@@ -30,29 +30,35 @@ const STRACE_DEMO: TerminalLine[] = [
 export default function TerminalDemo() {
   const [visibleLines, setVisibleLines] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
+  const timersRef = useRef<number[]>([]);
 
   const runDemo = useCallback(() => {
+    timersRef.current.forEach(id => clearTimeout(id));
+    timersRef.current = [];
     setVisibleLines(0);
     setIsRunning(true);
 
-    let lineIndex = 0;
     let totalDelay = 0;
 
     STRACE_DEMO.forEach((line, i) => {
       totalDelay += line.delay;
-      setTimeout(() => {
+      const id = setTimeout(() => {
         setVisibleLines(i + 1);
         if (i === STRACE_DEMO.length - 1) {
           setIsRunning(false);
         }
-      }, totalDelay);
-      lineIndex++;
+      }, totalDelay) as unknown as number;
+      timersRef.current.push(id);
     });
   }, []);
 
   useEffect(() => {
     const timer = setTimeout(runDemo, 1200);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      timersRef.current.forEach(id => clearTimeout(id));
+      timersRef.current = [];
+    };
   }, [runDemo]);
 
   const getLineColor = (type: TerminalLine['type']) => {
@@ -67,7 +73,7 @@ export default function TerminalDemo() {
   };
 
   return (
-    <div className="terminal-window animate-glow">
+    <div className="terminal-window">
       <div className="flex items-center gap-2 px-4 py-3 bg-midnight-900/80 border-b border-midnight-800/60">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -85,7 +91,7 @@ export default function TerminalDemo() {
           </button>
         )}
       </div>
-      <div className="p-3 sm:p-5 font-mono text-[10px] sm:text-[13px] leading-5 sm:leading-6 min-h-[300px] sm:min-h-[420px] overflow-x-auto">
+      <div aria-live="polite" className="p-3 sm:p-5 font-mono text-[10px] sm:text-[13px] leading-5 sm:leading-6 min-h-[300px] sm:min-h-[420px] overflow-x-auto">
         {STRACE_DEMO.slice(0, visibleLines).map((line, i) => (
           <div
             key={i}

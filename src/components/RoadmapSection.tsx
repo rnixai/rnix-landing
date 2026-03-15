@@ -81,12 +81,9 @@ export default function RoadmapSection() {
   const { ref, isInView } = useInView(0.08);
 
   return (
-    <section className="py-24 lg:py-32 section-padding bg-midnight-950/50" id="roadmap">
+    <section className="py-16 lg:py-24 section-padding bg-midnight-950/50" id="roadmap">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-sm font-semibold tracking-widest uppercase text-cyan-500 mb-3">
-            What Ships
-          </p>
+        <div className="max-w-2xl mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
             A complete OS, not a partial prototype
           </h2>
@@ -106,13 +103,11 @@ export default function RoadmapSection() {
             return (
               <div
                 key={cap.title}
-                className="glass-card-hover p-5 group"
+                className="border border-midnight-800/50 rounded-xl bg-midnight-900/20 p-5 group transition-colors hover:border-midnight-700/60"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-4 h-4 text-cyan-400" />
-                  </div>
+                  <Icon className="w-5 h-5 text-cyan-400 flex-shrink-0" />
                   <h3 className="text-sm font-semibold text-white">{cap.title}</h3>
                 </div>
                 <ul className="space-y-1.5">
@@ -128,7 +123,7 @@ export default function RoadmapSection() {
           })}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-10">
           <p className="text-sm text-midnight-500">
             Built with Go.{' '}
             <span className="text-midnight-300">goroutine = agent process, channel = IPC, interface = syscall contract.</span>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Github, Star } from 'lucide-react';
 import RnixLogo from './RnixLogo';
 
@@ -13,12 +13,30 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      const firstLink = mobileMenuRef.current?.querySelector('a');
+      firstLink?.focus();
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setMobileOpen(false);
+          toggleButtonRef.current?.focus();
+        }
+      };
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [mobileOpen]);
 
   return (
     <nav
@@ -54,18 +72,19 @@ export default function Navbar() {
               href="https://github.com/rnixai/rnix"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary !py-2 !px-4 text-sm"
+              className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm"
             >
               <Github className="w-4 h-4" />
               <Star className="w-3.5 h-3.5" />
               Star
             </a>
-            <a href="#get-started" className="btn-primary !py-2 !px-4 text-sm">
+            <a href="#get-started" className="inline-flex items-center gap-2 py-2 px-4 bg-cyan-600 text-white font-semibold rounded-lg transition-all duration-200 hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-600/20 active:scale-[0.98] text-sm">
               Get Started
             </a>
           </div>
 
           <button
+            ref={toggleButtonRef}
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden p-2 text-midnight-300 hover:text-white transition-colors"
             aria-label="Toggle menu"
@@ -76,7 +95,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-midnight-950/95 backdrop-blur-xl border-b border-midnight-800/60">
+        <div ref={mobileMenuRef} className="md:hidden bg-midnight-950/95 backdrop-blur-xl border-b border-midnight-800/60">
           <div className="section-padding py-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <a
@@ -93,12 +112,12 @@ export default function Navbar() {
                 href="https://github.com/rnixai/rnix"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary !py-2 !px-4 text-sm flex-1 justify-center"
+                className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm flex-1 justify-center"
               >
                 <Github className="w-4 h-4" />
                 Star
               </a>
-              <a href="#get-started" className="btn-primary !py-2 !px-4 text-sm flex-1 justify-center">
+              <a href="#get-started" className="inline-flex items-center gap-2 py-2 px-4 bg-cyan-600 text-white font-semibold rounded-lg transition-all duration-200 hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-600/20 active:scale-[0.98] text-sm flex-1 justify-center">
                 Get Started
               </a>
             </div>

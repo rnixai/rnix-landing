@@ -135,18 +135,18 @@ export default function ComparisonSection() {
               <div className="grid grid-cols-4 gap-2">
                 <div className="flex flex-col items-center gap-1">
                   <StatusIcon status={row.rnix} />
-                  <span className="text-[10px] font-semibold text-cyan-400">Rnix</span>
+                  <span className="text-[11px] font-semibold text-cyan-400">Rnix</span>
                 </div>
                 {COMPETITORS.map((name) => (
                   <div key={name} className="flex flex-col items-center gap-1">
                     <StatusIcon status={getCompetitorStatus(row, name)} />
-                    <span className="text-[10px] text-midnight-500">{name}</span>
+                    <span className="text-[11px] text-midnight-500">{name}</span>
                   </div>
                 ))}
               </div>
             </div>
           ))}
-          <div className="flex items-center justify-center gap-4 pt-2 text-[10px] text-midnight-500">
+          <div className="flex items-center justify-center gap-4 pt-2 text-[11px] text-midnight-500">
             <div className="flex items-center gap-1">
               <Check className="w-3 h-3 text-emerald-400" /> Native
             </div>

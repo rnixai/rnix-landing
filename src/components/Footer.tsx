@@ -39,7 +39,7 @@ export default function Footer() {
                 href="https://github.com/rnixai/rnix"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors"
+                className="w-10 h-10 rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -47,7 +47,7 @@ export default function Footer() {
                 href="https://twitter.com/rnixai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors"
+                className="w-10 h-10 rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors"
               >
                 <Twitter className="w-4 h-4" />
               </a>
@@ -113,7 +113,7 @@ export default function Footer() {
           <p className="text-xs text-midnight-600">
             Built from scratch in Go. Agents deserve an operating system.
           </p>
-          <p className="text-xs text-midnight-700">
+          <p className="text-xs text-midnight-500">
             &copy; {new Date().getFullYear()} Rnix. Open source under MIT License.
           </p>
         </div>

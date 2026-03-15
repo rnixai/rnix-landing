@@ -69,12 +69,9 @@ export default function FeaturesSection() {
   const { ref, isInView } = useInView(0.08);
 
   return (
-    <section className="py-24 lg:py-32 section-padding" id="features">
+    <section className="py-20 lg:py-28 section-padding" id="features">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-sm font-semibold tracking-widest uppercase text-cyan-500 mb-3">
-            Core Features
-          </p>
+        <div className="max-w-2xl mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
             OS-level primitives for AI agents
           </h2>
@@ -90,7 +87,7 @@ export default function FeaturesSection() {
             return (
               <div
                 key={feature.title}
-                className={`glass-card-hover p-6 flex flex-col min-w-0 ${
+                className={`glass-card-hover p-6 flex flex-col min-w-0 ${i === 0 ? 'md:col-span-2' : ''} ${
                   isInView ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${i * 100}ms` }}
@@ -100,7 +97,7 @@ export default function FeaturesSection() {
                     <Icon className="w-5 h-5 text-cyan-400" />
                   </div>
                   <span
-                    className={`text-[10px] font-semibold tracking-wider uppercase px-2 py-1 rounded-md border ${feature.tagColor}`}
+                    className={`text-[11px] font-semibold tracking-wider uppercase px-2 py-1 rounded-md border ${feature.tagColor}`}
                   >
                     {feature.tag}
                   </span>
@@ -111,7 +108,7 @@ export default function FeaturesSection() {
                   {feature.description}
                 </p>
 
-                <div className="bg-midnight-950/80 border border-midnight-800/50 rounded-lg p-3.5 font-mono text-[10px] sm:text-xs leading-5 text-midnight-300 overflow-x-auto whitespace-pre min-w-0">
+                <div className="bg-midnight-950/80 border border-midnight-800/50 rounded-lg p-3.5 font-mono text-[11px] sm:text-xs leading-5 text-midnight-300 overflow-x-auto whitespace-pre min-w-0">
                   {feature.code}
                 </div>
               </div>

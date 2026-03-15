@@ -7,7 +7,6 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
   }
 
   body {
@@ -22,19 +21,19 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-cyan-200;
+    @apply text-cyan-300;
   }
 
   .gradient-text-warm {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-ember-400 to-cyan-400;
+    @apply text-ember-400;
   }
 
   .glass-card {
-    @apply bg-midnight-900/60 backdrop-blur-xl border border-midnight-700/50 rounded-2xl;
+    @apply bg-midnight-900/40 backdrop-blur-sm border border-midnight-700/50 rounded-2xl;
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:border-cyan-700/40 hover:bg-midnight-900/80 hover:shadow-lg hover:shadow-cyan-950/20;
+    @apply glass-card transition-all duration-300 hover:border-midnight-600/60 hover:bg-midnight-900/50;
   }
 
   .terminal-window {
@@ -65,5 +64,14 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

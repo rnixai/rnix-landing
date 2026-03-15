@@ -41,12 +41,9 @@ export default function ProblemSection() {
   const { ref, isInView } = useInView(0.15);
 
   return (
-    <section className="py-24 lg:py-32 section-padding" id="problems">
+    <section className="py-16 lg:py-24 section-padding" id="problems">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-sm font-semibold tracking-widest uppercase text-cyan-500 mb-3">
-            The Problem
-          </p>
+        <div className="max-w-2xl mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
             Every framework hits the same ceiling
           </h2>
@@ -62,16 +59,12 @@ export default function ProblemSection() {
             return (
               <div
                 key={problem.title}
-                className={`glass-card-hover p-6 lg:p-8 ${
+                className={`border border-midnight-800/50 rounded-xl bg-midnight-900/20 p-6 lg:p-8 transition-colors hover:border-midnight-700/60 ${
                   isInView ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${i * 150}ms` }}
               >
-                <div
-                  className={`w-11 h-11 rounded-xl ${problem.bgColor} border ${problem.borderColor} flex items-center justify-center mb-5`}
-                >
-                  <Icon className={`w-5 h-5 ${problem.color}`} />
-                </div>
+                <Icon className={`w-7 h-7 ${problem.color} mb-4`} />
 
                 <h3 className="text-lg font-semibold text-white mb-3">{problem.title}</h3>
                 <p className="text-midnight-400 text-sm leading-relaxed mb-6">{problem.description}</p>

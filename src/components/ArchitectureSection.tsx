@@ -45,7 +45,7 @@ export default function ArchitectureSection() {
   const { ref, isInView } = useInView(0.1);
 
   return (
-    <section className="py-24 lg:py-32 section-padding bg-midnight-950/50" id="architecture">
+    <section className="py-20 lg:py-28 section-padding bg-midnight-950/50" id="architecture">
       <div className="section-container" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-sm font-semibold tracking-widest uppercase text-cyan-500 mb-3">
@@ -78,7 +78,7 @@ export default function ArchitectureSection() {
                   <div className={`font-semibold text-sm ${layer.textColor}`}>
                     {layer.label}
                   </div>
-                  <div className="text-[10px] sm:text-xs text-midnight-500 font-mono mt-1 break-all sm:break-normal">
+                  <div className="text-[10px] sm:text-xs text-midnight-500 font-mono mt-1 break-words sm:break-normal">
                     {layer.desc}
                   </div>
                 </div>

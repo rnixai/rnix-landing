@@ -31,13 +31,21 @@ export default {
           950: '#022c30',
         },
         ember: {
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
           400: '#f7936b',
           500: '#f56e3a',
           600: '#e2571a',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
+          950: '#431407',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       animation: {
@@ -48,7 +56,6 @@ export default {
         'terminal-blink': 'blink 1s step-end infinite',
         'pulse-slow': 'pulse 3s ease-in-out infinite',
         'typing': 'typing 3.5s steps(40, end)',
-        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         fadeIn: {
@@ -72,12 +79,8 @@ export default {
           '50%': { opacity: '0' },
         },
         typing: {
-          'from': { width: '0' },
-          'to': { width: '100%' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px rgba(44, 177, 188, 0.2), 0 0 10px rgba(44, 177, 188, 0.1)' },
-          '100%': { boxShadow: '0 0 10px rgba(44, 177, 188, 0.4), 0 0 20px rgba(44, 177, 188, 0.2)' },
+          'from': { clipPath: 'inset(0 100% 0 0)' },
+          'to': { clipPath: 'inset(0 0 0 0)' },
         },
       },
     },

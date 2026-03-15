@@ -98,7 +98,7 @@ export default function GetStartedSection() {
                       <div className="w-2 h-2 rounded-full bg-green-500/60" />
                     </div>
                   </div>
-                  <div className="p-3 sm:p-4 font-mono text-[10px] sm:text-xs leading-5 text-cyan-300 overflow-x-auto whitespace-pre">
+                  <div className="p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-5 text-cyan-300 overflow-x-auto whitespace-pre">
                     {item.code}
                   </div>
                   <CopyButton text={item.code} />

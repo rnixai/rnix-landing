@@ -84,12 +84,9 @@ export default function UseCasesSection() {
   const current = USE_CASES.find((c) => c.id === activeCase)!;
 
   return (
-    <section className="py-24 lg:py-32 section-padding" id="use-cases">
+    <section className="py-20 lg:py-28 section-padding" id="use-cases">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-sm font-semibold tracking-widest uppercase text-cyan-500 mb-3">
-            Use Cases
-          </p>
+        <div className="max-w-2xl mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
             Real developer journeys
           </h2>
@@ -104,13 +101,17 @@ export default function UseCasesSection() {
             isInView ? 'animate-fade-in' : 'opacity-0'
           }`}
         >
-          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0" role="tablist">
             {USE_CASES.map((uc) => {
               const Icon = uc.icon;
               const isActive = uc.id === activeCase;
               return (
                 <button
                   key={uc.id}
+                  id={`tab-${uc.id}`}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${uc.id}`}
                   onClick={() => setActiveCase(uc.id)}
                   className={`flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl text-left transition-all duration-200 min-w-[180px] sm:min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink ${
                     isActive
@@ -129,7 +130,7 @@ export default function UseCasesSection() {
             })}
           </div>
 
-          <div className="glass-card p-4 sm:p-6 lg:p-8 min-w-0">
+          <div className="glass-card p-4 sm:p-6 lg:p-8 min-w-0" role="tabpanel" id={`panel-${activeCase}`} aria-labelledby={`tab-${activeCase}`}>
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-6">
               <div className="min-w-0">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{current.title}</h3>
@@ -158,9 +159,9 @@ export default function UseCasesSection() {
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
                 </div>
-                <span className="text-[10px] text-midnight-600 font-mono ml-2">terminal</span>
+                <span className="text-[11px] text-midnight-600 font-mono ml-2">terminal</span>
               </div>
-              <div className="p-3 sm:p-4 font-mono text-[10px] sm:text-xs leading-5 overflow-x-auto">
+              <div className="p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-5 overflow-x-auto">
                 {current.terminal.map((line, i) => (
                   <div
                     key={i}

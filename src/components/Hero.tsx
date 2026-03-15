@@ -4,18 +4,6 @@ import TerminalDemo from './TerminalDemo';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-600/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-cyan-700/6 rounded-full blur-[100px]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(44,177,188,0.3) 1px, transparent 0)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-      </div>
-
       <div className="section-container section-padding relative z-10 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="max-w-xl">
@@ -24,7 +12,7 @@ export default function Hero() {
               Built with Go from scratch
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-white mb-6">
               The Operating System for{' '}
               <span className="gradient-text">AI Agents</span>
             </h1>
