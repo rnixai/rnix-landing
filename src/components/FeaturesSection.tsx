@@ -14,7 +14,7 @@ const FEATURES = [
     title: 'strace for AI Agents',
     description:
       'Trace every syscall an agent makes. See exactly what it read, what it wrote, where it went wrong — with nanosecond precision.',
-    code: `rnix strace 1\n\n[0.04s] Open("/dev/fs/src/auth/logout.go")\n        ^^^ WRONG FILE`,
+    code: `rnix strace 1\n[0.04s] Open("/dev/fs/.../logout.go") → 5\n        ^^^ WRONG FILE`,
     tag: 'Killer Feature',
     tagColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
   },
@@ -23,7 +23,7 @@ const FEATURES = [
     title: 'Agents as Processes',
     description:
       'spawn / kill / wait / signal — full process lifecycle semantics. Process trees, state machines, zombie reaping. Real OS primitives, not simulations.',
-    code: `rnix ps\n\nPID  STATE    AGENT          TOKENS\n 1   Running  code-analyst   1,204\n 2   Zombie   reviewer       3,891`,
+    code: `rnix ps\n\nPID  STATE   AGENT   TOKENS\n 1   Running  analyst  1,204\n 2   Zombie   review  3,891`,
     tag: 'Core',
     tagColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
   },
@@ -32,7 +32,7 @@ const FEATURES = [
     title: 'Everything is a File',
     description:
       'Tools → /dev/ devices. MCP → /mnt/ mounts. Agent state → /proc/ files. One unified interface replaces fragmented tool/service/state abstractions.',
-    code: `/proc/1/status   → Running\n/dev/llm/*        → LLM reasoning\n/dev/fs/src/      → Host filesystem\n/dev/shell        → Shell execution`,
+    code: `/proc/{pid}/status\n/dev/llm/claude\n/dev/fs\n/dev/shell`,
     tag: 'VFS',
     tagColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
   },
@@ -41,16 +41,16 @@ const FEATURES = [
     title: 'Skills as Packages',
     description:
       'SKILL.md follows the Agent Skills open standard (agentskills.io). Write once, share everywhere — compatible with 30+ AI tools in the ecosystem.',
-    code: `---\nname: code-analysis\ndescription: Analyze code quality\nallowed-tools:\n  - Read\n  - Grep\n---\n## Steps\n1. Read the target file...`,
+    code: `---\nname: code-analysis\nallowed-tools: /dev/fs /dev/shell\n---\n## Steps\n1. Read target file...`,
     tag: 'Ecosystem',
     tagColor: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
   },
   {
     icon: Layers,
-    title: '4-Layer Capability Stack',
+    title: '4-Layer Capability Model',
     description:
-      'Agent (identity) → Skill (how-to) → MCP (external services) → Device (native I/O). Each layer has clear responsibilities. No overlap, no gaps.',
-    code: `Agent:  "code-analyst"\n  └─ Skill: "code-analysis"\n      └─ MCP: github-server\n          └─ Device: /dev/fs`,
+      'Process (runtime) → Agent (identity) → Skill (how-to) → VFS Device. Each layer has clear responsibilities. Skills define allowed-tools; agents aggregate permissions.',
+    code: `Process: PID 1\n  └─ Agent: code-analyst\n      └─ Skill: code-analysis\n          allowed-tools: /dev/fs /dev/shell\n      └─ VFS: /dev/llm /dev/fs /dev/shell`,
     tag: 'Architecture',
     tagColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
   },
@@ -59,7 +59,7 @@ const FEATURES = [
     title: '45 Syscalls. One ABI.',
     description:
       'A stable, versioned syscall interface — the "constitution" of the OS. 45 syscalls covering process management, IPC, VFS, signals, capabilities, and debugging.',
-    code: `// 45 syscalls across 7 domains\nSpawn Kill Wait Signal Send Recv Pipe\nCtxAlloc CtxRead CtxWrite CtxFree\nOpen Read Write Close Mount Stat\nCapGrant CapRevoke CapCheck\nDebugRecord Attach Snapshot`,
+    code: `Process: Spawn Kill Wait ListProcs\nContext: CtxAlloc CtxRead CtxWrite CtxFree\nVFS: Open Read Write Close Stat\nIPC/Signal: Send Recv Pipe\nDebug: SyscallEvent auto-recorded`,
     tag: 'ABI',
     tagColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
   },
@@ -108,7 +108,7 @@ export default function FeaturesSection() {
                   {feature.description}
                 </p>
 
-                <div className="bg-midnight-950/80 border border-midnight-800/50 rounded-lg p-3.5 font-mono text-[11px] sm:text-xs leading-5 text-midnight-300 overflow-x-auto whitespace-pre min-w-0">
+                <div className="bg-midnight-950/80 border border-midnight-800/50 rounded-lg p-3.5 font-mono text-[11px] sm:text-xs leading-5 text-midnight-300 whitespace-pre min-w-0 overflow-hidden">
                   {feature.code}
                 </div>
               </div>

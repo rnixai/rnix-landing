@@ -1,6 +1,7 @@
 import { useInView } from '../hooks/useInView';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, BookOpen } from 'lucide-react';
 import { useState } from 'react';
+import { withUtm } from '../utils/utm';
 
 const STEPS = [
   {
@@ -11,23 +12,16 @@ const STEPS = [
   },
   {
     step: '2',
-    title: 'Create your first Agent',
-    desc: 'Define who it is and what skills it has.',
-    code: `mkdir -p lib/agents/code-analyst
-cat > lib/agents/code-analyst/agent.yaml << 'EOF'
-name: code-analyst
-description: Analyzes code quality and identifies issues
-models:
-  preferred: sonnet
-skills:
-  - code-analysis
-EOF`,
+    title: 'Initialize configuration',
+    desc: 'Creates ~/.config/rnix/ and .rnix/ with agents and skills directories.',
+    code: `rnix init
+# Creates: ~/.config/rnix/agents/ skills/ providers.yaml`,
   },
   {
     step: '3',
     title: 'Run and trace',
-    desc: 'Spawn an agent and watch every syscall.',
-    code: `rnix "analyze ./src/scheduler.go" --agent=code-analyst
+    desc: 'Spawn an agent and watch every syscall. Daemon auto-starts on first use.',
+    code: `rnix -i "Analyze the code quality of ./cmd/main.go"
 
 # In another terminal:
 rnix strace 1`,
@@ -43,10 +37,18 @@ function CopyButton({ text }: { text: string }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleCopy();
+    }
+  };
+
   return (
     <button
       onClick={handleCopy}
-      className="absolute top-3 right-3 p-1.5 rounded-md bg-midnight-800/60 text-midnight-500 hover:text-cyan-400 hover:bg-midnight-800 transition-colors"
+      onKeyDown={handleKeyDown}
+      className="absolute top-3 right-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md bg-midnight-800/60 text-midnight-500 hover:text-cyan-400 hover:bg-midnight-800 transition-colors focus-ring"
       aria-label="Copy code"
     >
       {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -68,7 +70,7 @@ export default function GetStartedSection() {
             Up and running in 15 minutes
           </h2>
           <p className="text-midnight-400 text-lg">
-            Prerequisites: Go 1.21+ installed. Supports multiple LLM providers out of the box.
+            Prerequisites: Go 1.26+ installed. Supports multiple LLM providers out of the box.
           </p>
         </div>
 
@@ -106,6 +108,19 @@ export default function GetStartedSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className={`mt-12 text-center ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
+          <a
+            href={withUtm('https://docs.rnix.ai/', 'docs_get_started', 'cta')}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Read the full documentation (opens in new tab)"
+            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors focus-ring rounded-lg px-4 py-2"
+          >
+            <BookOpen className="w-4 h-4" />
+            Read the full documentation
+          </a>
         </div>
       </div>
     </section>

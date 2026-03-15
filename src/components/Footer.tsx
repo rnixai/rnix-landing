@@ -1,5 +1,6 @@
 import { Github, Twitter } from 'lucide-react';
 import RnixLogo from './RnixLogo';
+import { withUtm } from '../utils/utm';
 
 const LINKS = {
   product: [
@@ -9,15 +10,17 @@ const LINKS = {
     { label: 'What Ships', href: '#roadmap' },
   ],
   resources: [
-    { label: 'Documentation', href: '#get-started' },
-    { label: 'Quick Start', href: '#get-started' },
-    { label: 'Syscall Reference', href: '#features' },
-    { label: 'Agent Skills Standard', href: 'https://agentskills.io', external: true },
+    { label: 'Documentation', href: 'https://docs.rnix.ai/', external: true, utmContent: 'docs_footer' },
+    { label: 'Quick Start', href: 'https://docs.rnix.ai/guide/quick-start', external: true, utmContent: 'quick_start_footer' },
+    { label: 'Intent System', href: 'https://docs.rnix.ai/guide/intent-system', external: true, utmContent: 'intent_footer' },
+    { label: 'Autonomous Agents (OODA)', href: 'https://docs.rnix.ai/guide/autonomous-agents', external: true, utmContent: 'ooda_footer' },
+    { label: 'Syscall Reference', href: 'https://docs.rnix.ai/reference/', external: true, utmContent: 'syscall_footer' },
+    { label: 'Agent Skills Standard', href: 'https://agentskills.io', external: true, utmContent: 'agentskills_footer' },
   ],
   community: [
-    { label: 'GitHub', href: 'https://github.com/rnixai/rnix', external: true },
-    { label: 'Discussions', href: 'https://github.com/rnixai/rnix/discussions', external: true },
-    { label: 'Contributing', href: 'https://github.com/rnixai/rnix/blob/main/CONTRIBUTING.md', external: true },
+    { label: 'GitHub', href: 'https://github.com/rnixai/rnix', external: true, utmContent: 'github_footer' },
+    { label: 'Discussions', href: 'https://github.com/rnixai/rnix/discussions', external: true, utmContent: 'discussions_footer' },
+    { label: 'Contributing', href: 'https://github.com/rnixai/rnix/blob/main/CONTRIBUTING.md', external: true, utmContent: 'contributing_footer' },
   ],
 };
 
@@ -27,7 +30,7 @@ export default function Footer() {
       <div className="section-container py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           <div className="col-span-2 md:col-span-1">
-            <a href="#" className="flex items-center gap-2.5 mb-4">
+            <a href="#" className="flex items-center gap-2.5 mb-4 focus-ring rounded-md inline-flex w-fit">
               <RnixLogo size={32} />
               <span className="text-lg font-bold text-white tracking-tight">Rnix</span>
             </a>
@@ -36,18 +39,20 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://github.com/rnixai/rnix"
+                href={withUtm('https://github.com/rnixai/rnix', 'github_icon_footer', 'footer')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors"
+                aria-label="Rnix on GitHub (opens in new tab)"
+                className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors focus-ring"
               >
                 <Github className="w-4 h-4" />
               </a>
               <a
-                href="https://twitter.com/rnixai"
+                href={withUtm('https://twitter.com/decker502', 'twitter_icon_footer', 'footer')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors"
+                aria-label="Rnix on Twitter (opens in new tab)"
+                className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors focus-ring"
               >
                 <Twitter className="w-4 h-4" />
               </a>
@@ -61,7 +66,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {LINKS.product.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors">
+                  <a href={link.href} className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors focus-ring rounded py-1">
                     {link.label}
                   </a>
                 </li>
@@ -76,10 +81,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {LINKS.resources.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    {...('external' in link && link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors"
+                    <a
+                    href={'utmContent' in link ? withUtm(link.href, link.utmContent, 'footer') : link.href}
+                    {...('external' in link && link.external
+                      ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${link.label} (opens in new tab)` }
+                      : {})}
+                    className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors focus-ring rounded py-1"
                   >
                     {link.label}
                   </a>
@@ -96,10 +103,11 @@ export default function Footer() {
               {LINKS.community.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.href}
+                    href={withUtm(link.href, link.utmContent, 'footer')}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors"
+                    aria-label={`${link.label} (opens in new tab)`}
+                    className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors focus-ring rounded py-1"
                   >
                     {link.label}
                   </a>

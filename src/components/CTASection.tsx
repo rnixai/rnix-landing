@@ -1,5 +1,6 @@
-import { ArrowRight, Github } from 'lucide-react';
+import { ArrowRight, Github, BookOpen } from 'lucide-react';
 import RnixLogo from './RnixLogo';
+import { withUtm } from '../utils/utm';
 
 export default function CTASection() {
   return (
@@ -20,16 +21,27 @@ export default function CTASection() {
               abstraction layer.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
               <a href="#get-started" className="btn-primary text-base">
                 Get Started
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com/rnixai/rnix"
+                href={withUtm('https://docs.rnix.ai/', 'docs_cta_section', 'cta')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-ember-500/40 text-ember-300 font-medium rounded-lg transition-all duration-200 hover:border-ember-400/60 hover:text-ember-200 hover:bg-ember-500/10 active:scale-[0.98] text-base"
+                aria-label="Read the documentation (opens in new tab)"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-base focus-ring"
+              >
+                <BookOpen className="w-4 h-4" />
+                Documentation
+              </a>
+              <a
+                href={withUtm('https://github.com/rnixai/rnix', 'github_cta_section', 'cta')}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Star Rnix on GitHub (opens in new tab)"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-ember-500/40 text-ember-300 font-medium rounded-lg transition-all duration-200 hover:border-ember-400/60 hover:text-ember-200 hover:bg-ember-500/10 active:scale-[0.98] text-base focus-ring"
               >
                 <Github className="w-4.5 h-4.5" />
                 Star on GitHub

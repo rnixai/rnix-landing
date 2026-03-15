@@ -43,9 +43,9 @@ const USE_CASES: UseCase[] = [
     before:
       'Wiring 3 agents for PR review + code analysis + docs in LangGraph: state graphs, node logic, data passing. Estimated: 2 weeks.',
     after:
-      'skill install 3 community skills, write a rnix-compose.yaml with depends_on, run rnix compose up. Done in 30 minutes.',
+      'rnix skill install 3 community skills, write compose.yaml with depends_on, run rnix compose up. Done in 30 minutes.',
     terminal: [
-      '$ skill install pr-reviewer code-analyst tech-writer',
+      '$ rnix skill install pr-reviewer code-analyst tech-writer',
       '$ rnix compose up',
       '',
       'PID  STATE    AGENT       DEPENDS_ON',
@@ -64,7 +64,7 @@ const USE_CASES: UseCase[] = [
     before:
       'A PR review flags a correct function as "security vulnerability." Need to find out why without understanding Rnix internals.',
     after:
-      'rnix log shows the reviewer\'s reasoning, categorized by [think] / [tool] / [output]. The diff was truncated — context budget too small.',
+      'rnix log 5 shows the reviewer\'s reasoning, categorized by [think] / [tool] / [output]. The diff was truncated — context budget too small.',
     terminal: [
       '$ rnix log 5',
       '',
@@ -72,7 +72,7 @@ const USE_CASES: UseCase[] = [
       '[think] Partial code looks like injection...',
       '[output] "Security vulnerability detected"',
       '',
-      'Fix: increase context_budget in compose.yaml',
+      'Fix: increase context_budget in agent.yaml',
     ],
     highlight: 'No kernel knowledge needed',
   },
@@ -113,7 +113,7 @@ export default function UseCasesSection() {
                   aria-selected={isActive}
                   aria-controls={`panel-${uc.id}`}
                   onClick={() => setActiveCase(uc.id)}
-                  className={`flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl text-left transition-all duration-200 min-w-[180px] sm:min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink ${
+                  className={`flex items-center gap-3 px-3 sm:px-4 py-3 min-h-[44px] rounded-xl text-left transition-all duration-200 min-w-[180px] sm:min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink focus-ring ${
                     isActive
                       ? 'bg-midnight-800/80 border border-cyan-700/30 text-white'
                       : 'border border-transparent text-midnight-400 hover:text-midnight-200 hover:bg-midnight-900/40'

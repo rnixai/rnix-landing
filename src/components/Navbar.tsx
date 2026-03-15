@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Github, Star } from 'lucide-react';
+import { Menu, X, Github, Star, BookOpen } from 'lucide-react';
 import RnixLogo from './RnixLogo';
+import { withUtm } from '../utils/utm';
 
 const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#architecture' },
   { label: 'Use Cases', href: '#use-cases' },
   { label: 'Comparison', href: '#comparison' },
-  { label: 'Get Started', href: '#get-started' },
 ];
 
 export default function Navbar() {
@@ -23,14 +23,30 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      const firstLink = mobileMenuRef.current?.querySelector('a');
-      firstLink?.focus();
+    if (mobileOpen && mobileMenuRef.current) {
+      const menu = mobileMenuRef.current;
+      const focusables = menu.querySelectorAll<HTMLElement>('a, button');
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      first?.focus();
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           setMobileOpen(false);
           toggleButtonRef.current?.focus();
+          return;
+        }
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            toggleButtonRef.current?.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first?.focus();
+          }
         }
       };
       document.addEventListener('keydown', handleKeyDown);
@@ -48,7 +64,7 @@ export default function Navbar() {
     >
       <div className="section-container section-padding">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2.5 group">
+          <a href="#" className="flex items-center gap-2.5 group focus-ring rounded-md">
             <div className="transition-transform duration-200 group-hover:scale-105">
               <RnixLogo size={32} />
             </div>
@@ -60,7 +76,10 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm text-midnight-300 hover:text-cyan-400 transition-colors duration-200 rounded-md"
+                {...('external' in link && link.external
+                  ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${link.label} (opens in new tab)` }
+                  : {})}
+                className="px-3 py-2 text-sm text-midnight-300 hover:text-cyan-400 transition-colors duration-200 rounded-md focus-ring"
               >
                 {link.label}
               </a>
@@ -69,25 +88,34 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="https://github.com/rnixai/rnix"
+              href={withUtm('https://docs.rnix.ai/', 'docs_cta_nav', 'cta')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm"
+              aria-label="Documentation (opens in new tab)"
+              className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm focus-ring"
+            >
+              <BookOpen className="w-4 h-4" />
+              Docs
+            </a>
+            <a
+              href={withUtm('https://github.com/rnixai/rnix', 'github_star_nav', 'cta')}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Star Rnix on GitHub (opens in new tab)"
+              className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm focus-ring"
             >
               <Github className="w-4 h-4" />
               <Star className="w-3.5 h-3.5" />
               Star
-            </a>
-            <a href="#get-started" className="inline-flex items-center gap-2 py-2 px-4 bg-cyan-600 text-white font-semibold rounded-lg transition-all duration-200 hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-600/20 active:scale-[0.98] text-sm">
-              Get Started
             </a>
           </div>
 
           <button
             ref={toggleButtonRef}
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-midnight-300 hover:text-white transition-colors"
+            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-midnight-300 hover:text-white transition-colors focus-ring rounded-md"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -102,23 +130,35 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="px-3 py-2.5 text-sm text-midnight-300 hover:text-cyan-400 transition-colors rounded-md"
+                {...('external' in link && link.external
+                  ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${link.label} (opens in new tab)` }
+                  : {})}
+                className="px-3 py-2.5 text-sm text-midnight-300 hover:text-cyan-400 transition-colors rounded-md focus-ring min-h-[44px] flex items-center"
               >
                 {link.label}
               </a>
             ))}
-            <div className="flex gap-3 mt-3 pt-3 border-t border-midnight-800/60">
+            <div className="flex flex-wrap gap-3 mt-3 pt-3 border-t border-midnight-800/60">
               <a
-                href="https://github.com/rnixai/rnix"
+                href={withUtm('https://docs.rnix.ai/', 'docs_cta_mobile', 'cta')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm flex-1 justify-center"
+                aria-label="Documentation (opens in new tab)"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex items-center gap-2 py-2 px-4 border border-cyan-700/50 text-cyan-300 font-medium rounded-lg transition-all duration-200 hover:border-cyan-600 hover:bg-cyan-500/10 active:scale-[0.98] text-sm min-h-[44px] focus-ring"
+              >
+                <BookOpen className="w-4 h-4" />
+                Docs
+              </a>
+              <a
+                href={withUtm('https://github.com/rnixai/rnix', 'github_star_mobile', 'cta')}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Star Rnix on GitHub (opens in new tab)"
+                className="inline-flex items-center gap-2 py-2 px-4 border border-midnight-600 text-midnight-200 font-medium rounded-lg transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50 active:scale-[0.98] text-sm flex-1 justify-center min-h-[44px] focus-ring"
               >
                 <Github className="w-4 h-4" />
                 Star
-              </a>
-              <a href="#get-started" className="inline-flex items-center gap-2 py-2 px-4 bg-cyan-600 text-white font-semibold rounded-lg transition-all duration-200 hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-600/20 active:scale-[0.98] text-sm flex-1 justify-center">
-                Get Started
               </a>
             </div>
           </div>

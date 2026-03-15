@@ -1,5 +1,6 @@
 import { ArrowRight, Github } from 'lucide-react';
 import TerminalDemo from './TerminalDemo';
+import { withUtm } from '../utils/utm';
 
 export default function Hero() {
   return (
@@ -14,7 +15,7 @@ export default function Hero() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-white mb-6">
               The Operating System for{' '}
-              <span className="gradient-text">AI Agents</span>
+              <span className="accent-text">AI Agents</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-midnight-300 leading-relaxed mb-8 text-balance">
@@ -23,15 +24,16 @@ export default function Hero() {
               OS-level <code className="font-mono text-sm bg-midnight-800/80 px-1.5 py-0.5 rounded">strace</code> for AI.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8">
               <a href="#get-started" className="btn-primary text-base">
                 Get Started
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com/rnixai/rnix"
+                href={withUtm('https://github.com/rnixai/rnix', 'github_hero', 'cta')}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="View Rnix on GitHub (opens in new tab)"
                 className="btn-secondary text-base"
               >
                 <Github className="w-4.5 h-4.5" />

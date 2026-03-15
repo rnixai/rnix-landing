@@ -23,9 +23,26 @@ const COMPARISON: CompRow[] = [
 const COMPETITORS = ['LangGraph', 'AutoGen', 'CrewAI'] as const;
 
 function StatusIcon({ status }: { status: 'yes' | 'no' | 'partial' }) {
-  if (status === 'yes') return <Check className="w-4 h-4 text-emerald-400" />;
-  if (status === 'partial') return <Minus className="w-4 h-4 text-amber-400" />;
-  return <X className="w-4 h-4 text-midnight-600" />;
+  const label = status === 'yes' ? 'Native support' : status === 'partial' ? 'Partial' : 'Not available';
+  return (
+    <span className="flex items-center justify-center gap-1.5">
+      {status === 'yes' && <Check className="w-4 h-4 text-emerald-400" aria-hidden />}
+      {status === 'partial' && <Minus className="w-4 h-4 text-amber-400" aria-hidden />}
+      {status === 'no' && <X className="w-4 h-4 text-midnight-600" aria-hidden />}
+      <span className="sr-only">{label}</span>
+    </span>
+  );
+}
+
+function MobileStatusCell({ status, label }: { status: 'yes' | 'no' | 'partial'; label: string }) {
+  const statusText = status === 'yes' ? 'Native' : status === 'partial' ? 'Partial' : 'None';
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <StatusIcon status={status} />
+      <span className="text-[11px] text-midnight-500">{label}</span>
+      <span className="text-[10px] font-medium text-midnight-400">{statusText}</span>
+    </div>
+  );
 }
 
 
@@ -60,19 +77,19 @@ export default function ComparisonSection() {
             <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="border-b border-midnight-800/60">
-                  <th className="text-left text-sm font-medium text-midnight-400 py-4 px-6 w-[280px]">
+                  <th scope="col" className="text-left text-sm font-medium text-midnight-400 py-4 px-6 w-[280px]">
                     Capability
                   </th>
-                  <th className="text-center text-sm font-semibold text-cyan-400 py-4 px-4 bg-cyan-500/5">
+                  <th scope="col" className="text-center text-sm font-semibold text-cyan-400 py-4 px-4 bg-cyan-500/5">
                     Rnix
                   </th>
-                  <th className="text-center text-sm font-medium text-midnight-400 py-4 px-4">
+                  <th scope="col" className="text-center text-sm font-medium text-midnight-400 py-4 px-4">
                     LangGraph
                   </th>
-                  <th className="text-center text-sm font-medium text-midnight-400 py-4 px-4">
+                  <th scope="col" className="text-center text-sm font-medium text-midnight-400 py-4 px-4">
                     AutoGen
                   </th>
-                  <th className="text-center text-sm font-medium text-midnight-400 py-4 px-4">
+                  <th scope="col" className="text-center text-sm font-medium text-midnight-400 py-4 px-4">
                     CrewAI
                   </th>
                 </tr>
@@ -133,15 +150,9 @@ export default function ComparisonSection() {
             <div key={row.feature} className="glass-card p-4">
               <div className="text-xs font-mono text-midnight-200 mb-3">{row.feature}</div>
               <div className="grid grid-cols-4 gap-2">
-                <div className="flex flex-col items-center gap-1">
-                  <StatusIcon status={row.rnix} />
-                  <span className="text-[11px] font-semibold text-cyan-400">Rnix</span>
-                </div>
+                <MobileStatusCell status={row.rnix} label="Rnix" />
                 {COMPETITORS.map((name) => (
-                  <div key={name} className="flex flex-col items-center gap-1">
-                    <StatusIcon status={getCompetitorStatus(row, name)} />
-                    <span className="text-[11px] text-midnight-500">{name}</span>
-                  </div>
+                  <MobileStatusCell key={name} status={getCompetitorStatus(row, name)} label={name} />
                 ))}
               </div>
             </div>

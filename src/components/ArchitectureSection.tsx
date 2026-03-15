@@ -2,8 +2,8 @@ import { useInView } from '../hooks/useInView';
 
 const LAYERS = [
   {
-    label: 'AgentShell CLI',
-    desc: 'rnix "intent" / strace / ps / compose',
+    label: 'CLI & AgentShell',
+    desc: 'rnix -i "intent" / strace / ps / compose / run',
     color: 'border-cyan-500/40 bg-cyan-500/5',
     textColor: 'text-cyan-300',
   },
@@ -15,14 +15,14 @@ const LAYERS = [
   },
   {
     label: 'Microkernel',
-    desc: 'Process Model / VFS / Context / Syscall ABI',
+    desc: 'Process Model / VFS / Context / IPC / 45-syscall ABI',
     color: 'border-midnight-600/60 bg-midnight-800/40',
     textColor: 'text-white',
     highlight: true,
   },
   {
     label: 'Driver Layer',
-    desc: '/dev/llm/*  /dev/fs  /dev/shell  /mnt/mcp/',
+    desc: '/dev/llm/claude  /dev/llm/cursor  /dev/fs  /dev/shell  /mnt/mcp/',
     color: 'border-midnight-700/40 bg-midnight-900/40',
     textColor: 'text-midnight-200',
   },
@@ -35,8 +35,8 @@ const LAYERS = [
 ];
 
 const FLOW_STEPS = [
-  { step: '01', title: 'Define', desc: 'Write agent.yaml + SKILL.md to declare who the agent is and what it can do.' },
-  { step: '02', title: 'Spawn', desc: 'rnix "analyze this code" --agent=code-analyst creates a process with full lifecycle.' },
+  { step: '01', title: 'Init', desc: 'Run rnix init to create ~/.config/rnix/ and .rnix/. Write agent.yaml + SKILL.md in agents/ and skills/.' },
+  { step: '02', title: 'Spawn', desc: 'rnix -i "Analyze this code" --agent=code-analyst creates a process with full lifecycle. Daemon auto-starts on first use.' },
   { step: '03', title: 'Reason', desc: 'The kernel drives a reasonStep loop: LLM call → tool execution → context update → repeat.' },
   { step: '04', title: 'Trace', desc: 'rnix strace 1 shows every syscall — what was read, what was called, what went wrong.' },
 ];

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --logo-stroke: #243b53; /* midnight-800 */
+    --logo-accent: #38bec9; /* cyan-400 */
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -20,12 +25,16 @@
 }
 
 @layer components {
-  .gradient-text {
+  .accent-text {
     @apply text-cyan-300;
   }
 
   .gradient-text-warm {
     @apply text-ember-400;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-midnight-950;
   }
 
   .glass-card {
@@ -43,13 +52,13 @@
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg
            transition-all duration-200 hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-600/20
-           active:scale-[0.98];
+           active:scale-[0.98] focus-ring;
   }
 
   .btn-secondary {
     @apply inline-flex items-center gap-2 px-6 py-3 border border-midnight-600 text-midnight-200 font-medium rounded-lg
            transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50
-           active:scale-[0.98];
+           active:scale-[0.98] focus-ring;
   }
 
   .section-padding {
@@ -65,13 +74,20 @@
   .text-balance {
     text-wrap: balance;
   }
+  @supports not (text-wrap: balance) {
+    .text-balance {
+      text-wrap: normal;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  html {
     scroll-behavior: auto !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

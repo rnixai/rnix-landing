@@ -7,21 +7,18 @@ interface TerminalLine {
 }
 
 const STRACE_DEMO: TerminalLine[] = [
-  { text: '$ rnix "review this code" --agent=code-analyst', type: 'command', delay: 0 },
-  { text: '[kernel] Spawning process PID=1 agent=code-analyst', type: 'dim', delay: 800 },
-  { text: '[agent/1] state: Created → Running', type: 'output', delay: 400 },
+  { text: '$ rnix -i "Review this code" --agent=code-analyst', type: 'command', delay: 0 },
+  { text: '[kernel] spawning PID 1 (claude/haiku)...', type: 'dim', delay: 800 },
+  { text: '[agent/1] reasoning step 1...', type: 'output', delay: 400 },
   { text: '', type: 'dim', delay: 300 },
   { text: '$ rnix strace 1', type: 'command', delay: 600 },
-  { text: '─── syscall trace for PID 1 ───', type: 'dim', delay: 400 },
-  { text: '[0.00s] Spawn(pid=1, agent="code-analyst")       → ok', type: 'output', delay: 300 },
-  { text: '[0.01s] CtxAlloc(pid=1, budget=8192)             → ctx_0x01', type: 'output', delay: 200 },
-  { text: '[0.02s] Open("/dev/fs/src/auth/login.go", R)     → fd=3', type: 'output', delay: 200 },
-  { text: '[0.03s] Read(fd=3, len=2048)                     → 2048 bytes', type: 'output', delay: 200 },
-  { text: '[0.04s] CtxWrite(ctx_0x01, "file_content", ...)  → ok', type: 'output', delay: 200 },
-  { text: '[0.12s] Open("/dev/llm/sonnet", RW)              → fd=4', type: 'output', delay: 300 },
-  { text: '[0.13s] Write(fd=4, prompt, 3200 tokens)         → ok', type: 'output', delay: 200 },
-  { text: '[3.41s] Read(fd=4)                               → tool_call', type: 'highlight', delay: 1200 },
-  { text: '[3.42s] Open("/dev/fs/src/auth/logout.go", R)    → fd=5', type: 'error', delay: 400 },
+  { text: '[strace] attached to PID 1 (state: running)', type: 'dim', delay: 400 },
+  { text: '[  0.013s] Open(path="/dev/llm/claude") → 3    1ms', type: 'output', delay: 300 },
+  { text: '[  0.014s] Write(fd=3, size=1234) → <nil>    5.20s  ← LLM call', type: 'output', delay: 200 },
+  { text: '[  5.214s] Read(fd=3, length=65536) → 892B      2ms', type: 'output', delay: 200 },
+  { text: '[  5.216s] Open(path="/dev/fs/./src/auth/login.go") → 4', type: 'output', delay: 200 },
+  { text: '[  5.217s] Read(fd=4, length=65536) → 2048       1ms', type: 'output', delay: 200 },
+  { text: '[  5.218s] Open(path="/dev/fs/./src/auth/logout.go") → 5', type: 'error', delay: 400 },
   { text: '        ^^^ WRONG FILE — expected login.go, got logout.go', type: 'error', delay: 100 },
   { text: '', type: 'dim', delay: 400 },
   { text: '3 minutes. From 3 days to 3 minutes.', type: 'success', delay: 600 },
@@ -85,7 +82,7 @@ export default function TerminalDemo() {
         {!isRunning && visibleLines >= STRACE_DEMO.length && (
           <button
             onClick={runDemo}
-            className="text-xs text-midnight-500 hover:text-cyan-400 transition-colors font-mono"
+            className="text-xs text-midnight-500 hover:text-cyan-400 transition-colors font-mono min-h-[44px] min-w-[44px] flex items-center justify-center focus-ring rounded"
           >
             replay
           </button>

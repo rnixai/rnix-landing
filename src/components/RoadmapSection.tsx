@@ -12,6 +12,8 @@ import {
   Package,
   Plug,
   RotateCcw,
+  GitBranch,
+  Brain,
 } from 'lucide-react';
 
 const CAPABILITIES = [
@@ -33,7 +35,7 @@ const CAPABILITIES = [
   {
     icon: FileCode2,
     title: 'Skills Ecosystem',
-    items: ['Agent Skills open standard', 'SKILL.md progressive loading', 'skill install / search / update'],
+    items: ['Agent Skills open standard', 'SKILL.md progressive loading', 'rnix skill install / search / update'],
   },
   {
     icon: MessageSquare,
@@ -43,7 +45,17 @@ const CAPABILITIES = [
   {
     icon: Layers,
     title: 'Compose Orchestration',
-    items: ['Declarative YAML workflows', 'DAG dependency scheduling', 'compose up / compose down'],
+    items: ['Declarative YAML workflows', 'DAG dependency scheduling', 'rnix compose up / down'],
+  },
+  {
+    icon: GitBranch,
+    title: 'Intent System',
+    items: ['Declarative intent decomposition', 'rnix intent apply / status / list', 'Reconciler drives intent tree'],
+  },
+  {
+    icon: Brain,
+    title: 'Autonomous Agents (OODA)',
+    items: ['Observe-Orient-Decide-Act loop', 'reasoning: ooda in agent.yaml', 'Stem cell differentiation + mission command'],
   },
   {
     icon: Plug,
@@ -53,22 +65,22 @@ const CAPABILITIES = [
   {
     icon: RotateCcw,
     title: 'Supervisor Trees',
-    items: ['one_for_one / all / rest_for_one', 'Automatic crash recovery', 'Init bootstrap sequence'],
+    items: ['one_for_one / one_for_all / rest_for_one', 'Automatic crash recovery', 'Init bootstrap sequence'],
   },
   {
     icon: Activity,
     title: 'Live Monitoring',
-    items: ['rnix top real-time TUI', 'rnix log structured output', 'Token budget management'],
+    items: ['rnix top real-time TUI', 'rnix log [think]/[tool]/[output]', 'Token budget management'],
   },
   {
     icon: TerminalSquare,
     title: 'AgentShell',
-    items: ['Pipe syntax: spawn A | spawn B', 'Variables + environment passing', 'if-else + on-error control'],
+    items: ['Pipe: rnix -i \'spawn "A" | spawn "B"\'', 'Variables + environment passing', 'if-else + on-error control'],
   },
   {
     icon: Package,
     title: '45 Syscalls',
-    items: ['Stable, versioned ABI', 'Process + Context + VFS + IPC', 'Signal + Timer + Capability'],
+    items: ['Stable, versioned ABI', 'Process + Context + VFS + IPC + Signal + Capability', 'Automatic SyscallEvent tracing'],
   },
   {
     icon: ShieldCheck,
@@ -89,7 +101,8 @@ export default function RoadmapSection() {
           </h2>
           <p className="text-midnight-400 text-lg">
             Rnix launches with the full capability stack: microkernel, VFS, IPC,
-            compose orchestration, skill ecosystem, supervisor trees, and monitoring.
+            compose orchestration, intent system, autonomous agents (OODA),
+            skill ecosystem, supervisor trees, and monitoring.
           </p>
         </div>
 
