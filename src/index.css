@@ -3,18 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  /* Light mode: dark stroke (for light bg) */
+  /* Landing 仅深色模式：logo 固定为深色底用浅色描边 */
   :root {
-    --logo-stroke: #243b53; /* midnight-800 */
-    --logo-accent: #38bec9; /* cyan-400 */
-  }
-
-  /* Dark mode: light stroke (for dark bg), same as rnix-docs logo-dark */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --logo-stroke: #E2E8F0;
-      --logo-accent: #4A9EFF;
-    }
+    --logo-stroke: #E2E8F0;
+    --logo-accent: #4A9EFF;
   }
 
   html {
