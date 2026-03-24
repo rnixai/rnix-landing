@@ -48,14 +48,74 @@ const COMPOSE_LINES: TerminalLine[] = [
   { text: '✓ compose complete — 2/2 agents exited(0)', type: 'success', delay: 400 },
 ];
 
+const DASHBOARD_LINES: TerminalLine[] = [
+  { text: '$ rnix dashboard', type: 'command', delay: 0 },
+  { text: '[dashboard] connecting to daemon...', type: 'dim', delay: 600 },
+  { text: '[dashboard] loading 4 active processes', type: 'dim', delay: 400 },
+  { text: '', type: 'dim', delay: 300 },
+  { text: '╭─ Rnix Dashboard ─ [1]Tree [2]Time [3]Heat [4]Detail [5]Intent ──╮', type: 'highlight', delay: 200 },
+  { text: '│                     │                                            │', type: 'output', delay: 100 },
+  { text: '│  AGENT TREE        │  TIMELINE                                    │', type: 'output', delay: 100 },
+  { text: '│  ▸ ● 1 orchestratr │  10:31:02 ● PID 1 spawn(coder)              │', type: 'output', delay: 150 },
+  { text: '│    ├─ ● 2 coder    │  10:31:05 ■ PID 2 write(1024 tok)  ← LLM   │', type: 'output', delay: 150 },
+  { text: '│    ├─ ● 3 reviewer │  10:31:08 ◆ PID 3 open(/dev/shell)          │', type: 'output', delay: 150 },
+  { text: '│    └─ ✓ 4 research │  10:31:10 ✕ PID 4 exit(0)                   │', type: 'dim', delay: 150 },
+  { text: '│                     │                                            │', type: 'output', delay: 100 },
+  { text: '│                     │  FOCUS: PID 2 coder ━━ Running 2m30s        │', type: 'highlight', delay: 200 },
+  { text: '│                     │  ┌─ Tokens ──────┐ ┌─ Context ────┐        │', type: 'output', delay: 150 },
+  { text: '│                     │  │ ██████▓░ 1.2k  │ │ Sys  ██░ 15% │        │', type: 'output', delay: 150 },
+  { text: '│                     │  │ rate: 12 tok/s │ │ User ████ 30%│        │', type: 'output', delay: 150 },
+  { text: '│                     │  │ steps: 5       │ │ Asst ████ 45%│        │', type: 'output', delay: 150 },
+  { text: '│                     │  └───────────────┘ └──────────────┘        │', type: 'output', delay: 150 },
+  { text: '╰─ 4 procs (3● 1✓) │ 2.9k tok ── 1-8:jump L:llm H:history ────────╯', type: 'dim', delay: 300 },
+  { text: '', type: 'dim', delay: 200 },
+  { text: '┌─ [press 1] Tree expanded — all processes unified ────────────────┐', type: 'highlight', delay: 600 },
+  { text: '│ PID  ST  AGENT          MODEL           TOKENS   ELAPSED  EXIT  │', type: 'output', delay: 150 },
+  { text: '│ ▸ 1  ●   orchestrator   claude-sonnet     820    5m12s     -   │', type: 'output', delay: 150 },
+  { text: '│ ├ 2  ●   coder          claude-sonnet   1,204    2m30s     -   │', type: 'output', delay: 150 },
+  { text: '│ ├ 3  ●   reviewer       claude-haiku      312    1m05s     -   │', type: 'output', delay: 150 },
+  { text: '│ └ 4  ✓   researcher     claude-haiku      580    0m58s     0   │', type: 'dim', delay: 150 },
+  { text: '│ ● Running: 3 │ ✓ Done: 1 │ ✕ Failed: 0 │ Total: 2,916 tok     │', type: 'success', delay: 200 },
+  { text: '└─────────────────────────────────────────────────────────────────┘', type: 'highlight', delay: 200 },
+  { text: '', type: 'dim', delay: 200 },
+  { text: '┌─ [press L] LLM Viewer — full request/response per step ─────────┐', type: 'highlight', delay: 600 },
+  { text: '│ ┌─ REQUEST → claude-sonnet ───────────────── 1,024 tok ───────┐ │', type: 'output', delay: 150 },
+  { text: '│ │ [system] You are a coder agent...                          │ │', type: 'output', delay: 150 },
+  { text: '│ │ [user] Implement POST /api/users                           │ │', type: 'output', delay: 150 },
+  { text: '│ └────────────────────────────────────────────────────────────┘ │', type: 'output', delay: 150 },
+  { text: '│ ┌─ RESPONSE ← claude-sonnet ───── 512 tok │ latency: 2.8s ───┐ │', type: 'success', delay: 200 },
+  { text: '│ │ [assistant] I\'ll create the handler...                    │ │', type: 'output', delay: 150 },
+  { text: '│ │ [tool_call] write_file → src/handlers/user.go             │ │', type: 'output', delay: 150 },
+  { text: '│ └────────────────────────────────────────────────────────────┘ │', type: 'success', delay: 150 },
+  { text: '│ ◀ Step 2 │ Step 3* │ Step 4 ▶  j/k:scroll  h/l:step  Esc:close│', type: 'dim', delay: 200 },
+  { text: '└─────────────────────────────────────────────────────────────────┘', type: 'highlight', delay: 200 },
+  { text: '', type: 'dim', delay: 200 },
+  { text: '┌─ [press H] History — unified process list, dead & alive ────────┐', type: 'highlight', delay: 600 },
+  { text: '│ PID  ST  AGENT          TOKENS  ELAPSED  EXIT  REASON          │', type: 'output', delay: 150 },
+  { text: '│   1  ●   orchestrator     820   5m12s     -    -               │', type: 'output', delay: 150 },
+  { text: '│   2  ●   coder          1,204   2m30s     -    -               │', type: 'output', delay: 150 },
+  { text: '│   3  ●   reviewer         312   1m05s     -    -               │', type: 'output', delay: 150 },
+  { text: '│ ▸ 4  ✓   researcher       580   0m58s     0    completed       │', type: 'dim', delay: 150 },
+  { text: '│   5  ✓   planner          890   2m00s     0    completed       │', type: 'dim', delay: 150 },
+  { text: '│   6  ✕   linter            45   0m05s     1    lint failed     │', type: 'error', delay: 150 },
+  { text: '│ ●:3  ✓:3  ✕:1 │ 3,971 tok │ Avg life: 1m42s                   │', type: 'success', delay: 200 },
+  { text: '└─────────────────────────────────────────────────────────────────┘', type: 'highlight', delay: 200 },
+  { text: '', type: 'dim', delay: 300 },
+  { text: '● Running  ○ Created  ✓ Done  ✕ Failed  ⏸ Paused', type: 'dim', delay: 200 },
+  { text: '8 views. 1-8 to jump. No tab cycling. Full process history.', type: 'success', delay: 400 },
+];
+
 export default function Hero() {
   const [straceProgress, setStraceProgress] = useState(0);
   const [composeProgress, setComposeProgress] = useState(0);
-  const [activeTab, setActiveTab] = useState<'strace' | 'compose'>('strace');
+  const [dashboardProgress, setDashboardProgress] = useState(0);
+  const [activeTab, setActiveTab] = useState<'strace' | 'compose' | 'dashboard'>('strace');
   const [isStraceRunning, setIsStraceRunning] = useState(false);
   const [isComposeRunning, setIsComposeRunning] = useState(false);
+  const [isDashboardRunning, setIsDashboardRunning] = useState(false);
   const straceTimersRef = useRef<number[]>([]);
   const composeTimersRef = useRef<number[]>([]);
+  const dashboardTimersRef = useRef<number[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
 
   const runSequence = useCallback((
@@ -85,6 +145,7 @@ export default function Hero() {
   const runAll = useCallback(() => {
     runSequence(STRACE_LINES, setStraceProgress, setIsStraceRunning, straceTimersRef, 0);
     runSequence(COMPOSE_LINES, setComposeProgress, setIsComposeRunning, composeTimersRef, 500);
+    runSequence(DASHBOARD_LINES, setDashboardProgress, setIsDashboardRunning, dashboardTimersRef, 1000);
   }, [runSequence]);
 
   useEffect(() => {
@@ -93,10 +154,11 @@ export default function Hero() {
       clearTimeout(timer);
       straceTimersRef.current.forEach(id => clearTimeout(id));
       composeTimersRef.current.forEach(id => clearTimeout(id));
+      dashboardTimersRef.current.forEach(id => clearTimeout(id));
     };
   }, [runAll]);
 
-  const isRunning = isStraceRunning || isComposeRunning;
+  const isRunning = isStraceRunning || isComposeRunning || isDashboardRunning;
 
   const getLineColor = (type: TerminalLine['type']) => {
     switch (type) {
@@ -109,8 +171,8 @@ export default function Hero() {
     }
   };
 
-  const currentLines = activeTab === 'strace' ? STRACE_LINES : COMPOSE_LINES;
-  const currentProgress = activeTab === 'strace' ? straceProgress : composeProgress;
+  const currentLines = activeTab === 'strace' ? STRACE_LINES : activeTab === 'compose' ? COMPOSE_LINES : DASHBOARD_LINES;
+  const currentProgress = activeTab === 'strace' ? straceProgress : activeTab === 'compose' ? composeProgress : dashboardProgress;
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 overflow-hidden">
@@ -176,10 +238,20 @@ export default function Hero() {
               >
                 compose
               </button>
+              <button
+                onClick={() => setActiveTab('dashboard')}
+                className={`px-3 py-2 text-[11px] font-mono tracking-wider transition-colors border-b-2 ${
+                  activeTab === 'dashboard'
+                    ? 'text-secondary-container border-secondary-container'
+                    : 'text-gray-500 border-transparent hover:text-on-surface'
+                }`}
+              >
+                dashboard
+              </button>
             </div>
 
             <div className="ml-auto">
-              {!isRunning && straceProgress >= STRACE_LINES.length && composeProgress >= COMPOSE_LINES.length && (
+              {!isRunning && straceProgress >= STRACE_LINES.length && composeProgress >= COMPOSE_LINES.length && dashboardProgress >= DASHBOARD_LINES.length && (
                 <button onClick={runAll} className="px-3 py-2 text-[11px] font-mono text-gray-500 hover:text-primary-container transition-colors">
                   ↻ replay
                 </button>
@@ -194,7 +266,7 @@ export default function Hero() {
                 {line.text || '\u00A0'}
               </div>
             ))}
-            {((activeTab === 'strace' && isStraceRunning) || (activeTab === 'compose' && isComposeRunning)) && (
+            {((activeTab === 'strace' && isStraceRunning) || (activeTab === 'compose' && isComposeRunning) || (activeTab === 'dashboard' && isDashboardRunning)) && (
               <span className="inline-block w-2 h-4 bg-primary-container animate-terminal-blink" />
             )}
           </div>
