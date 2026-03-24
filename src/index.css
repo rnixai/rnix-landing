@@ -3,10 +3,20 @@
 @tailwind utilities;
 
 @layer base {
-  /* Landing 仅深色模式：logo 固定为深色底用浅色描边 */
   :root {
-    --logo-stroke: #E2E8F0;
-    --logo-accent: #4A9EFF;
+    --logo-stroke: #e0e0e0;
+    --logo-accent: #14d1ff;
+    --surface: #131313;
+    --surface-container-lowest: #0e0e0e;
+    --surface-container: #201f1f;
+    --surface-bright: #3a3939;
+    --primary: #00ff41;
+    --secondary: #14d1ff;
+    --tertiary: #ffb77d;
+    --on-surface: #e0e0e0;
+    --on-surface-variant: #a0a0a0;
+    --on-surface-muted: #707070;
+    --outline: #3b4b37;
   }
 
   html {
@@ -16,50 +26,77 @@
   }
 
   body {
-    @apply bg-midnight-950 text-midnight-100 font-sans;
+    background-color: var(--surface);
+    color: var(--on-surface);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
   }
 
   ::selection {
-    @apply bg-cyan-600/40 text-white;
+    background-color: rgba(0, 255, 65, 0.2);
+    color: white;
   }
 }
 
 @layer components {
   .accent-text {
-    @apply text-cyan-300;
+    color: var(--secondary);
   }
 
   .gradient-text-warm {
-    @apply text-ember-400;
+    color: var(--tertiary);
   }
 
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-midnight-950;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    --tw-ring-color: var(--primary);
+    --tw-ring-offset-color: var(--surface);
   }
 
   .glass-card {
-    @apply bg-midnight-900/40 backdrop-blur-sm border border-midnight-700/50 rounded-2xl;
+    background-color: rgba(32, 31, 31, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 0;
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:border-midnight-600/60 hover:bg-midnight-900/50;
+    background-color: rgba(32, 31, 31, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 0;
+    transition: all 0.3s;
+  }
+
+  .glass-card-hover:hover {
+    background-color: rgba(58, 57, 57, 0.6);
   }
 
   .terminal-window {
-    @apply bg-midnight-950 border border-midnight-700/60 rounded-xl overflow-hidden shadow-2xl;
+    background-color: var(--surface);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg
-           transition-all duration-200 hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-600/20
-           active:scale-[0.98] focus-ring;
+    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold transition-all duration-200 active:scale-[0.98] focus-ring;
+    background-color: var(--primary);
+    color: var(--surface);
+    border-radius: 0;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.1);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-6 py-3 border border-midnight-600 text-midnight-200 font-medium rounded-lg
-           transition-all duration-200 hover:border-cyan-700 hover:text-cyan-300 hover:bg-midnight-900/50
-           active:scale-[0.98] focus-ring;
+    @apply inline-flex items-center gap-2 px-6 py-3 font-medium transition-all duration-200 active:scale-[0.98] focus-ring;
+    color: var(--on-surface);
+    border-radius: 0;
+    border: 1px solid rgba(59, 75, 55, 0.15);
+  }
+
+  .btn-secondary:hover {
+    color: var(--primary);
   }
 
   .section-padding {
@@ -68,6 +105,18 @@
 
   .section-container {
     @apply max-w-7xl mx-auto;
+  }
+
+  .surface-elevated {
+    background-color: var(--surface-container);
+  }
+
+  .surface-recessed {
+    background-color: var(--surface-container-lowest);
+  }
+
+  .active-glow {
+    box-shadow: 0 0 4px rgba(0, 255, 65, 0.3);
   }
 }
 

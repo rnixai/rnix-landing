@@ -60,29 +60,29 @@ export default function TerminalDemo() {
 
   const getLineColor = (type: TerminalLine['type']) => {
     switch (type) {
-      case 'command': return 'text-cyan-400';
-      case 'output': return 'text-midnight-200';
-      case 'highlight': return 'text-cyan-300 font-medium';
-      case 'error': return 'text-red-400';
-      case 'success': return 'text-emerald-400 font-semibold';
-      case 'dim': return 'text-midnight-500';
+      case 'command': return 'text-secondary';
+      case 'output': return 'text-on_surface';
+      case 'highlight': return 'text-secondary font-medium';
+      case 'error': return 'text-tertiary';
+      case 'success': return 'text-primary font-semibold';
+      case 'dim': return 'text-on_surface_muted';
     }
   };
 
   return (
     <div className="terminal-window">
-      <div className="flex items-center gap-2 px-4 py-3 bg-midnight-900/80 border-b border-midnight-800/60">
+      <div className="flex items-center gap-2 px-4 py-3 bg-surface_container">
         <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          <div className="w-3 h-3 rounded-full bg-tertiary/80" />
+          <div className="w-3 h-3 rounded-full bg-tertiary/80" />
+          <div className="w-3 h-3 rounded-full bg-primary/80" />
         </div>
-        <span className="text-xs text-midnight-500 font-mono ml-2">rnix strace</span>
+        <span className="text-xs text-on_surface_muted font-mono ml-2">rnix strace</span>
         <div className="flex-1" />
         {!isRunning && visibleLines >= STRACE_DEMO.length && (
           <button
             onClick={runDemo}
-            className="text-xs text-midnight-500 hover:text-cyan-400 transition-colors font-mono min-h-[44px] min-w-[44px] flex items-center justify-center focus-ring rounded"
+            className="text-xs text-on_surface_muted hover:text-secondary transition-colors font-mono min-h-[44px] min-w-[44px] flex items-center justify-center focus-ring"
           >
             replay
           </button>
@@ -98,7 +98,7 @@ export default function TerminalDemo() {
           </div>
         ))}
         {isRunning && (
-          <span className="inline-block w-2 h-4 bg-cyan-400 animate-terminal-blink" />
+          <span className="inline-block w-2 h-4 bg-secondary animate-terminal-blink" />
         )}
       </div>
     </div>

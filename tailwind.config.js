@@ -4,6 +4,33 @@ export default {
   theme: {
     extend: {
       colors: {
+        surface: {
+          DEFAULT: 'var(--surface)',
+          container_lowest: 'var(--surface-container-lowest)',
+          container: 'var(--surface-container)',
+          bright: 'var(--surface-bright)',
+        },
+        primary: {
+          DEFAULT: 'var(--primary)',
+          container: 'var(--primary)',
+        },
+        secondary: {
+          DEFAULT: 'var(--secondary)',
+          container: 'var(--secondary)',
+        },
+        tertiary: {
+          DEFAULT: 'var(--tertiary)',
+          container: 'var(--tertiary)',
+        },
+        on_surface: {
+          DEFAULT: 'var(--on-surface)',
+          variant: 'var(--on-surface-variant)',
+          muted: 'var(--on-surface-muted)',
+        },
+        outline: {
+          DEFAULT: 'var(--outline)',
+          variant: 'rgba(59, 75, 55, 0.15)',
+        },
         midnight: {
           50: '#f0f4f8',
           100: '#d9e2ec',
@@ -45,8 +72,21 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter', 'Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['3.5rem', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'headline-md': ['1.75rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'title-md': ['1.125rem', { lineHeight: '1.4' }],
+        'body-md': ['0.875rem', { lineHeight: '1.6' }],
+        'body-sm': ['0.75rem', { lineHeight: '1.5' }],
+        'label-sm': ['0.6875rem', { lineHeight: '1.4', letterSpacing: '0.05em' }],
+      },
+      borderRadius: {
+        none: '0px',
+        sm: '2px',
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

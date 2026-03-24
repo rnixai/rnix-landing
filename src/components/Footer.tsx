@@ -26,15 +26,15 @@ const LINKS = {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-midnight-800/60 section-padding">
+    <footer className="section-padding">
       <div className="section-container py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           <div className="col-span-2 md:col-span-1">
-            <a href="#" className="flex items-center gap-2.5 mb-4 focus-ring rounded-md inline-flex w-fit">
+            <a href="#" className="flex items-center gap-2.5 mb-4 focus-ring inline-flex w-fit">
               <RnixLogo size={32} />
               <span className="text-lg font-bold text-white tracking-tight">Rnix</span>
             </a>
-            <p className="text-sm text-midnight-500 leading-relaxed mb-4 max-w-[240px]">
+            <p className="text-sm text-on_surface_muted leading-relaxed mb-4 max-w-[240px]">
               The operating system for AI agents. Built with Go from scratch.
             </p>
             <div className="flex gap-3">
@@ -43,7 +43,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Rnix on GitHub (opens in new tab)"
-                className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors focus-ring"
+                className="w-10 h-10 min-w-[44px] min-h-[44px] bg-surface_container flex items-center justify-center text-on_surface_muted hover:text-secondary transition-colors focus-ring"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -52,7 +52,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Rnix on Twitter (opens in new tab)"
-                className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-lg bg-midnight-900/60 border border-midnight-800/60 flex items-center justify-center text-midnight-500 hover:text-cyan-400 hover:border-cyan-700/40 transition-colors focus-ring"
+                className="w-10 h-10 min-w-[44px] min-h-[44px] bg-surface_container flex items-center justify-center text-on_surface_muted hover:text-secondary transition-colors focus-ring"
               >
                 <Twitter className="w-4 h-4" />
               </a>
@@ -60,13 +60,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold tracking-wider uppercase text-midnight-400 mb-4">
+            <h4 className="text-label-sm font-semibold tracking-wider uppercase text-on_surface_variant mb-4">
               Product
             </h4>
             <ul className="space-y-2.5">
               {LINKS.product.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors focus-ring rounded py-1">
+                  <a href={link.href} className="text-sm text-on_surface_muted hover:text-secondary transition-colors focus-ring py-1">
                     {link.label}
                   </a>
                 </li>
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold tracking-wider uppercase text-midnight-400 mb-4">
+            <h4 className="text-label-sm font-semibold tracking-wider uppercase text-on_surface_variant mb-4">
               Resources
             </h4>
             <ul className="space-y-2.5">
@@ -86,7 +86,7 @@ export default function Footer() {
                     {...('external' in link && link.external
                       ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${link.label} (opens in new tab)` }
                       : {})}
-                    className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors focus-ring rounded py-1"
+                    className="text-sm text-on_surface_muted hover:text-secondary transition-colors focus-ring py-1"
                   >
                     {link.label}
                   </a>
@@ -96,7 +96,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold tracking-wider uppercase text-midnight-400 mb-4">
+            <h4 className="text-label-sm font-semibold tracking-wider uppercase text-on_surface_variant mb-4">
               Community
             </h4>
             <ul className="space-y-2.5">
@@ -107,7 +107,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${link.label} (opens in new tab)`}
-                    className="text-sm text-midnight-500 hover:text-cyan-400 transition-colors focus-ring rounded py-1"
+                    className="text-sm text-on_surface_muted hover:text-secondary transition-colors focus-ring py-1"
                   >
                     {link.label}
                   </a>
@@ -117,11 +117,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-midnight-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-midnight-600">
+        <div className="mt-12 pt-8 bg-surface_container flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-on_surface_muted">
             Built from scratch in Go. Agents deserve an operating system.
           </p>
-          <p className="text-xs text-midnight-500">
+          <p className="text-xs text-on_surface_muted">
             &copy; {new Date().getFullYear()} Rnix. Open source under MIT License.
           </p>
         </div>

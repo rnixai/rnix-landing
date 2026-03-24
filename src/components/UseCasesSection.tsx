@@ -87,10 +87,10 @@ export default function UseCasesSection() {
     <section className="py-20 lg:py-28 section-padding" id="use-cases">
       <div className="section-container" ref={ref}>
         <div className="max-w-2xl mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
+          <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
             Real developer journeys
           </h2>
-          <p className="text-midnight-400 text-lg">
+          <p className="text-on_surface_variant text-lg">
             See how platform builders and app developers use Rnix to solve
             problems that existing frameworks can't.
           </p>
@@ -113,18 +113,18 @@ export default function UseCasesSection() {
                   aria-selected={isActive}
                   aria-controls={`panel-${uc.id}`}
                   onClick={() => setActiveCase(uc.id)}
-                  className={`flex items-center gap-3 px-3 sm:px-4 py-3 min-h-[44px] rounded-xl text-left transition-all duration-200 min-w-[180px] sm:min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink focus-ring ${
+                  className={`flex items-center gap-3 px-3 sm:px-4 py-3 min-h-[44px] text-left transition-all duration-200 min-w-[180px] sm:min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink focus-ring ${
                     isActive
-                      ? 'bg-midnight-800/80 border border-cyan-700/30 text-white'
-                      : 'border border-transparent text-midnight-400 hover:text-midnight-200 hover:bg-midnight-900/40'
+                      ? 'bg-surface_container text-white'
+                      : 'text-on_surface_variant hover:text-on_surface hover:bg-surface_container/50'
                   }`}
                 >
-                  <Icon className={`w-4.5 h-4.5 flex-shrink-0 ${isActive ? 'text-cyan-400' : ''}`} />
+                  <Icon className={`w-[18px] h-[18px] flex-shrink-0 ${isActive ? 'text-secondary' : ''}`} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-midnight-500 mb-0.5">{uc.persona}</div>
+                    <div className="text-xs text-on_surface_muted mb-0.5">{uc.persona}</div>
                     <div className="text-sm font-medium truncate">{uc.role}</div>
                   </div>
-                  <ChevronRight className={`w-4 h-4 flex-shrink-0 hidden lg:block ${isActive ? 'text-cyan-500' : 'text-midnight-700'}`} />
+                  <ChevronRight className={`w-4 h-4 flex-shrink-0 hidden lg:block ${isActive ? 'text-secondary' : 'text-on_surface_muted'}`} />
                 </button>
               );
             })}
@@ -134,32 +134,32 @@ export default function UseCasesSection() {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-6">
               <div className="min-w-0">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{current.title}</h3>
-                <p className="text-xs sm:text-sm text-midnight-400">{current.persona} / {current.role}</p>
+                <p className="text-xs sm:text-sm text-on_surface_variant">{current.persona} / {current.role}</p>
               </div>
-              <span className="text-xs sm:text-sm font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-lg whitespace-nowrap self-start">
+              <span className="text-xs sm:text-sm font-bold text-secondary bg-secondary/10 px-3 py-1 whitespace-nowrap self-start">
                 {current.highlight}
               </span>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-6 mb-6">
               <div>
-                <div className="text-xs font-semibold tracking-wider uppercase text-red-400/80 mb-2">Before</div>
-                <p className="text-sm text-midnight-400 leading-relaxed">{current.before}</p>
+                <div className="text-xs font-semibold tracking-wider uppercase text-tertiary mb-2">Before</div>
+                <p className="text-sm text-on_surface_variant leading-relaxed">{current.before}</p>
               </div>
               <div>
-                <div className="text-xs font-semibold tracking-wider uppercase text-emerald-400/80 mb-2">After</div>
-                <p className="text-sm text-midnight-300 leading-relaxed">{current.after}</p>
+                <div className="text-xs font-semibold tracking-wider uppercase text-primary mb-2">After</div>
+                <p className="text-sm text-on_surface leading-relaxed">{current.after}</p>
               </div>
             </div>
 
             <div className="terminal-window">
-              <div className="flex items-center gap-2 px-4 py-2.5 bg-midnight-900/80 border-b border-midnight-800/60">
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-surface_container">
                 <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-tertiary/70" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-tertiary/70" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary/70" />
                 </div>
-                <span className="text-[11px] text-midnight-600 font-mono ml-2">terminal</span>
+                <span className="text-[11px] text-on_surface_muted font-mono ml-2">terminal</span>
               </div>
               <div className="p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-5 overflow-x-auto">
                 {current.terminal.map((line, i) => (
@@ -167,12 +167,12 @@ export default function UseCasesSection() {
                     key={i}
                     className={
                       line.startsWith('$')
-                        ? 'text-cyan-400'
+                        ? 'text-secondary'
                         : line.includes('^^^') || line.includes('truncated')
-                          ? 'text-red-400'
+                          ? 'text-tertiary'
                           : line.includes('Fix:') || line.includes('Bug found') || line.includes('Done')
-                            ? 'text-emerald-400'
-                            : 'text-midnight-300'
+                            ? 'text-primary'
+                            : 'text-on_surface'
                     }
                   >
                     {line || '\u00A0'}

@@ -93,13 +93,13 @@ export default function RoadmapSection() {
   const { ref, isInView } = useInView(0.08);
 
   return (
-    <section className="py-16 lg:py-24 section-padding bg-midnight-950/50" id="roadmap">
+    <section className="py-16 lg:py-24 section-padding bg-surface_container_lowest" id="roadmap">
       <div className="section-container" ref={ref}>
         <div className="max-w-2xl mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
+          <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
             A complete OS, not a partial prototype
           </h2>
-          <p className="text-midnight-400 text-lg">
+          <p className="text-on_surface_variant text-lg">
             Rnix launches with the full capability stack: microkernel, VFS, IPC,
             compose orchestration, intent system, autonomous agents,
             skill ecosystem, supervisor trees, and monitoring.
@@ -116,17 +116,17 @@ export default function RoadmapSection() {
             return (
               <div
                 key={cap.title}
-                className="border border-midnight-800/50 rounded-xl bg-midnight-900/20 p-5 group transition-colors hover:border-midnight-700/60"
+                className="bg-surface_container p-5 group transition-colors hover:bg-surface_bright"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <Icon className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <Icon className="w-5 h-5 text-secondary flex-shrink-0" />
                   <h3 className="text-sm font-semibold text-white">{cap.title}</h3>
                 </div>
                 <ul className="space-y-1.5">
                   {cap.items.map((item) => (
-                    <li key={item} className="text-xs text-midnight-400 leading-relaxed flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-cyan-600/60 flex-shrink-0 mt-1.5" />
+                    <li key={item} className="text-xs text-on_surface_variant leading-relaxed flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full bg-secondary/60 flex-shrink-0 mt-1.5" />
                       {item}
                     </li>
                   ))}
@@ -137,9 +137,9 @@ export default function RoadmapSection() {
         </div>
 
         <div className="mt-10">
-          <p className="text-sm text-midnight-500">
+          <p className="text-sm text-on_surface_muted">
             Built with Go.{' '}
-            <span className="text-midnight-300">goroutine = agent process, channel = IPC, interface = syscall contract.</span>
+            <span className="text-on_surface">goroutine = agent process, channel = IPC, interface = syscall contract.</span>
           </p>
         </div>
       </div>
