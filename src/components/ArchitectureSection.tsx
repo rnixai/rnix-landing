@@ -4,19 +4,19 @@ const LAYERS = [
   {
     label: 'CLI & AgentShell',
     desc: 'rnix -i "intent" / strace / ps / compose / run',
-    color: 'bg-secondary/5',
-    textColor: 'text-secondary',
+    color: 'bg-secondary-container/5',
+    textColor: 'text-secondary-container',
   },
   {
     label: 'Agent + Skill Definitions',
     desc: 'agent.yaml + instructions.md + SKILL.md',
-    color: 'bg-secondary/5',
-    textColor: 'text-secondary',
+    color: 'bg-secondary-container/5',
+    textColor: 'text-secondary-container',
   },
   {
     label: 'Microkernel',
     desc: 'Process Model / VFS / Context / IPC / 45-syscall ABI',
-    color: 'bg-surface_container',
+    color: 'bg-surface-container',
     textColor: 'text-white',
     highlight: true,
   },
@@ -24,13 +24,13 @@ const LAYERS = [
     label: 'Driver Layer',
     desc: '/dev/llm/claude  /dev/llm/cursor  /dev/fs  /dev/shell  /mnt/mcp/',
     color: 'bg-surface',
-    textColor: 'text-on_surface',
+    textColor: 'text-on-surface',
   },
   {
     label: 'Host OS + Multi-LLM Providers',
     desc: 'Go runtime / goroutines / channels / pluggable LLM backends',
-    color: 'bg-surface_container_lowest',
-    textColor: 'text-on_surface_variant',
+    color: 'bg-surface-container-lowest',
+    textColor: 'text-on-surface-variant',
   },
 ];
 
@@ -45,16 +45,16 @@ export default function ArchitectureSection() {
   const { ref, isInView } = useInView(0.1);
 
   return (
-    <section className="py-20 lg:py-28 section-padding bg-surface_container_lowest" id="architecture">
-      <div className="section-container" ref={ref}>
+    <section className="py-40 px-6" id="architecture">
+      <div className="max-w-7xl mx-auto" ref={ref}>
         <div className="max-w-2xl mb-16">
-          <p className="text-label-sm font-semibold tracking-widest uppercase text-secondary mb-3">
+          <p className="text-xs font-semibold tracking-widest uppercase text-secondary-container mb-3 font-mono">
             Architecture
           </p>
-          <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
+          <h2 className="font-headline text-5xl md:text-6xl font-bold text-white mb-4 text-balance">
             How Rnix works
           </h2>
-          <p className="text-on_surface_variant text-lg">
+          <p className="text-on-surface-variant text-lg">
             A Gamma hybrid architecture — microkernel reliability at the bottom,
             emergent innovation potential at the top.
           </p>
@@ -64,30 +64,30 @@ export default function ArchitectureSection() {
           <div
             className={`${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}
           >
-            <h3 className="text-label-sm font-semibold tracking-widest uppercase text-on_surface_muted mb-6">
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-6 font-mono">
               System Stack
             </h3>
             <div className="flex flex-col gap-2">
               {LAYERS.map((layer) => (
                 <div
                   key={layer.label}
-                  className={`${layer.color} px-3 sm:px-5 py-3 sm:py-4 transition-colors ${
-                    layer.highlight ? 'ring-1 ring-secondary/20' : ''
+                  className={`${layer.color} px-5 py-4 transition-colors ${
+                    layer.highlight ? 'ring-1 ring-secondary-container/20' : ''
                   }`}
                 >
                   <div className={`font-semibold text-sm ${layer.textColor}`}>
                     {layer.label}
                   </div>
-                  <div className="text-[10px] sm:text-xs text-on_surface_muted font-mono mt-1 break-words sm:break-normal">
+                  <div className="text-xs text-gray-500 font-mono mt-1">
                     {layer.desc}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 p-4 bg-surface_container">
-              <p className="text-xs text-on_surface_muted leading-relaxed">
-                <span className="text-on_surface font-medium">Go language mapping:</span>{' '}
+            <div className="mt-6 p-4 bg-surface-container">
+              <p className="text-xs text-gray-500 leading-relaxed">
+                <span className="text-on-surface font-medium">Go language mapping:</span>{' '}
                 goroutine = agent process, channel = IPC, interface = syscall contract.
                 Single binary, zero external dependencies.
               </p>
@@ -97,23 +97,23 @@ export default function ArchitectureSection() {
           <div
             className={`${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}
           >
-            <h3 className="text-label-sm font-semibold tracking-widest uppercase text-on_surface_muted mb-6">
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-6 font-mono">
               Execution Flow
             </h3>
             <div className="flex flex-col gap-5">
               {FLOW_STEPS.map((item, i) => (
                 <div key={item.step} className="flex gap-4 group">
                   <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-xs font-bold text-secondary group-hover:brightness-110 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold text-secondary-container group-hover:brightness-110 transition-colors">
                       {item.step}
                     </div>
                     {i < FLOW_STEPS.length - 1 && (
-                      <div className="w-px flex-1 bg-surface_bright my-1" />
+                      <div className="w-px flex-1 bg-surface-bright my-1" />
                     )}
                   </div>
                   <div className="pb-5">
                     <h4 className="text-sm font-semibold text-white mb-1">{item.title}</h4>
-                    <p className="text-sm text-on_surface_variant leading-relaxed">{item.desc}</p>
+                    <p className="text-sm text-on-surface-variant leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}

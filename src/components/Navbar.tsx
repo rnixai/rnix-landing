@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Github, Star, BookOpen } from 'lucide-react';
+import { Menu, X, Github, BookOpen } from 'lucide-react';
 import RnixLogo from './RnixLogo';
 import { withUtm } from '../utils/utm';
 
@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: 'How It Works', href: '#architecture' },
   { label: 'Use Cases', href: '#use-cases' },
   { label: 'Comparison', href: '#comparison' },
+  { label: 'Capabilities', href: '#roadmap' },
 ];
 
 export default function Navbar() {
@@ -56,109 +57,112 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-surface/90 backdrop-blur-xl'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 w-full flex justify-between items-center px-6 sm:px-10 h-20 backdrop-blur-xl z-50"
+      style={{ backgroundColor: 'rgba(10, 10, 10, 0.8)', borderBottom: '1px solid rgba(59, 75, 55, 0.2)' }}
     >
-      <div className="section-container section-padding">
-        <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2.5 group focus-ring">
-            <div className="transition-transform duration-200 group-hover:scale-105">
-              <RnixLogo size={32} />
-            </div>
-            <span className="text-lg font-bold text-white tracking-tight">Rnix</span>
-          </a>
-
-          <div className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                {...('external' in link && link.external
-                  ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${link.label} (opens in new tab)` }
-                  : {})}
-                className="px-3 py-2 text-sm text-on_surface hover:text-primary transition-colors duration-200 focus-ring"
-              >
-                {link.label}
-              </a>
-            ))}
+      {/* Left: Logo + Nav Links */}
+      <div className="flex items-center gap-8 lg:gap-12">
+        <a href="#" className="flex items-center gap-2 group focus-ring">
+          <div className="transition-transform duration-200 group-hover:scale-105">
+            <RnixLogo size={32} />
           </div>
-
-          <div className="hidden md:flex items-center gap-3">
+          <span className="font-headline font-bold text-primary-container tracking-tighter text-xl uppercase">Rnix</span>
+        </a>
+        <div className="hidden lg:flex gap-6">
+          {NAV_LINKS.map((link) => (
             <a
-              href={withUtm('https://docs.rnix.ai/', 'docs_cta_nav', 'cta')}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Documentation (opens in new tab)"
-              className="inline-flex items-center gap-2 py-2 px-4 text-on_surface font-medium transition-all duration-200 hover:text-primary active:scale-[0.98] text-sm focus-ring"
+              key={link.label}
+              href={link.href}
+              className="font-headline tracking-widest uppercase text-[11px] text-gray-400 hover:text-primary-container transition-colors focus-ring"
             >
-              <BookOpen className="w-4 h-4" />
-              Docs
+              {link.label}
             </a>
-            <a
-              href={withUtm('https://github.com/rnixai/rnix', 'github_star_nav', 'cta')}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Star Rnix on GitHub (opens in new tab)"
-              className="inline-flex items-center gap-2 py-2 px-4 text-on_surface font-medium transition-all duration-200 hover:text-primary active:scale-[0.98] text-sm focus-ring"
-            >
-              <Github className="w-4 h-4" />
-              <Star className="w-3.5 h-3.5" />
-              Star
-            </a>
-          </div>
-
-          <button
-            ref={toggleButtonRef}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-on_surface hover:text-white transition-colors focus-ring"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          ))}
         </div>
       </div>
 
+      {/* Right: Action Buttons */}
+      <div className="hidden md:flex items-center gap-4">
+        <a
+          href={withUtm('https://docs.rnix.ai/', 'docs_nav', 'cta')}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Documentation (opens in new tab)"
+          className="inline-flex items-center gap-2 text-xs font-headline tracking-widest uppercase text-gray-400 hover:text-primary-container transition-colors focus-ring"
+        >
+          <BookOpen className="w-4 h-4" />
+          Docs
+        </a>
+        <a
+          href={withUtm('https://github.com/rnixai/rnix', 'github_nav', 'cta')}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub (opens in new tab)"
+          className="inline-flex items-center gap-2 text-xs font-headline tracking-widest uppercase text-gray-400 hover:text-primary-container transition-colors focus-ring"
+        >
+          <Github className="w-4 h-4" />
+          Star
+        </a>
+        <a
+          href="#get-started"
+          className="px-5 py-2 bg-primary-container text-on-primary text-xs font-headline font-bold uppercase tracking-widest hover:brightness-110 transition-all focus-ring"
+        >
+          Get Started
+        </a>
+      </div>
+
+      {/* Mobile Menu Toggle */}
+      <button
+        ref={toggleButtonRef}
+        onClick={() => setMobileOpen(!mobileOpen)}
+        className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-white transition-colors focus-ring"
+        aria-label="Toggle menu"
+        aria-expanded={mobileOpen}
+      >
+        {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+      </button>
+
+      {/* Mobile Menu */}
       {mobileOpen && (
-        <div ref={mobileMenuRef} className="md:hidden bg-surface/95 backdrop-blur-xl">
-          <div className="section-padding py-4 flex flex-col gap-1">
+        <div ref={mobileMenuRef} className="md:hidden absolute top-20 left-0 right-0 backdrop-blur-xl" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)', borderBottom: '1px solid rgba(59, 75, 55, 0.2)' }}>
+          <div className="px-6 py-6 flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                {...('external' in link && link.external
-                  ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${link.label} (opens in new tab)` }
-                  : {})}
-                className="px-3 py-2.5 text-sm text-on_surface hover:text-primary transition-colors focus-ring min-h-[44px] flex items-center"
+                className="font-headline tracking-widest uppercase text-sm text-gray-400 hover:text-primary-container transition-colors focus-ring min-h-[44px] flex items-center"
               >
                 {link.label}
               </a>
             ))}
-            <div className="flex flex-wrap gap-3 mt-3 pt-3 bg-surface_container">
+            <div className="flex flex-col gap-3 mt-4 pt-4" style={{ borderTop: '1px solid rgba(59, 75, 55, 0.2)' }}>
               <a
-                href={withUtm('https://docs.rnix.ai/', 'docs_cta_mobile', 'cta')}
+                href={withUtm('https://docs.rnix.ai/', 'docs_nav_mobile', 'cta')}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Documentation (opens in new tab)"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center gap-2 py-2 px-4 text-primary font-medium transition-all duration-200 hover:brightness-110 active:scale-[0.98] text-sm min-h-[44px] focus-ring"
+                className="inline-flex items-center gap-2 font-headline tracking-widest uppercase text-sm text-gray-400 hover:text-primary-container transition-colors focus-ring min-h-[44px]"
               >
                 <BookOpen className="w-4 h-4" />
-                Docs
+                Documentation
               </a>
               <a
-                href={withUtm('https://github.com/rnixai/rnix', 'github_star_mobile', 'cta')}
+                href={withUtm('https://github.com/rnixai/rnix', 'github_nav_mobile', 'cta')}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Star Rnix on GitHub (opens in new tab)"
-                className="inline-flex items-center gap-2 py-2 px-4 text-on_surface font-medium transition-all duration-200 hover:text-primary active:scale-[0.98] text-sm flex-1 justify-center min-h-[44px] focus-ring"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex items-center gap-2 font-headline tracking-widest uppercase text-sm text-gray-400 hover:text-primary-container transition-colors focus-ring min-h-[44px]"
               >
                 <Github className="w-4 h-4" />
-                Star
+                GitHub
+              </a>
+              <a
+                href="#get-started"
+                onClick={() => setMobileOpen(false)}
+                className="px-6 py-2 bg-primary-container text-on-primary text-sm font-headline font-bold uppercase tracking-widest hover:brightness-110 transition-all text-center focus-ring min-h-[44px] flex items-center justify-center"
+              >
+                Get Started
               </a>
             </div>
           </div>

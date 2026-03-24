@@ -1,82 +1,50 @@
 import { useInView } from '../hooks/useInView';
-import { Bug, Puzzle, Users } from 'lucide-react';
-
-const PROBLEMS = [
-  {
-    icon: Bug,
-    title: 'Debugging Black Box',
-    description:
-      'Current frameworks dump flat logs. When an agent fails 1 in 20 times, you spend days scanning thousands of lines with no causal chain, no context snapshots.',
-    stat: 'Days',
-    statLabel: 'to locate intermittent bugs',
-    color: 'text-tertiary',
-  },
-  {
-    icon: Puzzle,
-    title: 'Non-Reusable Capabilities',
-    description:
-      'Every project rebuilds the same agent skills from scratch. No standard format, no package manager, no way to share domain knowledge across teams.',
-    stat: '0%',
-    statLabel: 'skill reuse across projects',
-    color: 'text-tertiary',
-  },
-  {
-    icon: Users,
-    title: 'Coordination Chaos',
-    description:
-      'Frameworks reinvent scheduling, isolation, and permissions at the app layer. The ceiling is structural: you can add features, but you can\'t add layers.',
-    stat: '2000+',
-    statLabel: 'lines to wire 3 agents',
-    color: 'text-secondary',
-  },
-];
 
 export default function ProblemSection() {
   const { ref, isInView } = useInView(0.15);
 
   return (
-    <section className="py-16 lg:py-24 section-padding" id="problems">
-      <div className="section-container" ref={ref}>
-        <div className="max-w-2xl mb-16">
-          <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
-            Every framework hits the same ceiling
+    <section className="py-40 px-6 max-w-7xl mx-auto" id="problems">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center" ref={ref}>
+        <div className={`${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
+          <h2 className="font-headline text-5xl md:text-6xl font-bold mb-8 leading-tight">
+            Frameworks are <span className="text-error">Black Boxes</span>.
           </h2>
-          <p className="text-on_surface_variant text-lg">
-            LangGraph, AutoGen, CrewAI, MetaGPT — they all reinvent OS primitives at the app layer.
-            But app-layer abstractions have a structural ceiling.
+          <p className="text-on-surface-variant text-lg leading-relaxed mb-8">
+            LangGraph, AutoGen, CrewAI — they all reinvent OS primitives at the app layer.
+            Flat logs, no causal chain, no process isolation. When an agent fails 1 in 20 times,
+            you spend days scanning thousands of lines.
           </p>
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <span className="text-error font-mono">✕</span>
+              <span className="text-sm font-mono uppercase tracking-wider text-on-surface">No process isolation</span>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="text-error font-mono">✕</span>
+              <span className="text-sm font-mono uppercase tracking-wider text-on-surface">Opaque I/O streams</span>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="text-error font-mono">✕</span>
+              <span className="text-sm font-mono uppercase tracking-wider text-on-surface">No syscall-level debugging</span>
+            </div>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {PROBLEMS.map((problem, i) => {
-            const Icon = problem.icon;
-            return (
-              <div
-                key={problem.title}
-                className={`bg-surface_container p-6 lg:p-8 transition-colors hover:bg-surface_bright ${
-                  isInView ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
-                style={{ animationDelay: `${i * 150}ms` }}
-              >
-                <Icon className={`w-7 h-7 ${problem.color} mb-4`} />
-
-                <h3 className="text-title-md font-semibold text-white mb-3">{problem.title}</h3>
-                <p className="text-on_surface_variant text-body-md leading-relaxed mb-6">{problem.description}</p>
-
-                <div className="pt-5">
-                  <div className={`text-2xl font-bold ${problem.color}`}>{problem.stat}</div>
-                  <div className="text-xs text-on_surface_muted mt-1">{problem.statLabel}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-on_surface_muted text-sm">
-            The answer isn't a better framework.{' '}
-            <span className="text-on_surface">It's an operating system.</span>
+        <div className={`bg-surface-container p-12 relative ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`} style={{ border: '1px solid rgba(0, 255, 65, 0.2)' }}>
+          <div className="absolute -top-4 -left-4 bg-primary-container text-on-primary px-4 py-1 text-xs font-bold tracking-widest uppercase">
+            The Solution
+          </div>
+          <h3 className="font-headline text-4xl font-bold mb-6 text-primary-container">Rnix is the OS.</h3>
+          <p className="text-on-surface-variant text-lg leading-relaxed mb-10">
+            Treat agents as native OS processes. Each gets a PID, state machine, FD table.
+            Communication through standard file I/O. Debug with strace — see every syscall,
+            every LLM call, every file read.
           </p>
+          <a href="#architecture" className="text-primary-container font-headline font-bold text-sm tracking-widest uppercase flex items-center gap-2 group">
+            Explore Architecture
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </a>
         </div>
       </div>
     </section>

@@ -4,18 +4,18 @@ import { withUtm } from '../utils/utm';
 
 export default function CTASection() {
   return (
-    <section className="py-20 lg:py-28 section-padding">
-      <div className="section-container">
-        <div className="relative overflow-hidden bg-surface_container p-8 sm:p-12 lg:p-16">
+    <section className="py-40 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="relative overflow-hidden bg-surface-container p-8 sm:p-12 lg:p-16" style={{ border: '1px solid rgba(0, 255, 65, 0.2)' }}>
           <div className="relative z-10 max-w-2xl mx-auto text-center">
             <div className="inline-flex items-center justify-center mb-6">
               <RnixLogo size={56} />
             </div>
 
-            <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
+            <h2 className="font-headline text-5xl md:text-6xl font-bold text-white mb-4 text-balance">
               Stop debugging in the dark
             </h2>
-            <p className="text-on_surface text-lg mb-8 leading-relaxed">
+            <p className="text-on-surface-variant text-lg mb-8 leading-relaxed">
               The multi-agent framework era hit its ceiling. It's time for an operating system.
               Rnix gives you the primitives to build, debug, and compose AI agents at the right
               abstraction layer.
@@ -31,7 +31,8 @@ export default function CTASection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Read the documentation (opens in new tab)"
-                className="inline-flex items-center gap-2 px-6 py-3 text-on_surface font-medium transition-all duration-200 hover:text-primary active:scale-[0.98] text-base focus-ring"
+                className="inline-flex items-center gap-2 px-6 py-3 text-on-surface font-medium transition-all duration-200 hover:text-primary-container active:scale-[0.98] text-base focus-ring"
+                style={{ border: '1px solid rgba(59, 75, 55, 0.5)' }}
               >
                 <BookOpen className="w-4 h-4" />
                 Documentation
@@ -41,9 +42,10 @@ export default function CTASection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Star Rnix on GitHub (opens in new tab)"
-                className="inline-flex items-center gap-2 px-6 py-3 text-tertiary font-medium transition-all duration-200 hover:brightness-110 active:scale-[0.98] text-base focus-ring"
+                className="inline-flex items-center gap-2 px-6 py-3 text-tertiary-fixed-dim font-medium transition-all duration-200 hover:brightness-110 active:scale-[0.98] text-base focus-ring"
+                style={{ border: '1px solid rgba(255, 183, 125, 0.4)' }}
               >
-                <Github className="w-[18px] h-[18px]" />
+                <Github className="w-5 h-5" />
                 Star on GitHub
               </a>
             </div>

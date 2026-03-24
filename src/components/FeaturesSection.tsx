@@ -1,67 +1,48 @@
 import { useInView } from '../hooks/useInView';
-import {
-  Search,
-  Cpu,
-  FolderTree,
-  FileCode2,
-  Layers,
-  Zap,
-} from 'lucide-react';
+import { Cpu, FolderTree, Search, Brain, Bug, FileCode2 } from 'lucide-react';
 
 const FEATURES = [
   {
-    icon: Search,
-    title: 'strace for AI Agents',
-    description:
-      'Trace every syscall an agent makes. See exactly what it read, what it wrote, where it went wrong — with nanosecond precision.',
-    code: `rnix strace 1\n[0.04s] Open("/dev/fs/.../logout.go") → 5\n        ^^^ WRONG FILE`,
-    tag: 'Killer Feature',
-    tagColor: 'text-primary bg-primary/10',
-  },
-  {
     icon: Cpu,
-    title: 'Agents as Processes',
+    title: 'Everything is a Process',
     description:
-      'spawn / kill / wait / signal — full process lifecycle semantics. Process trees, state machines, zombie reaping. Real OS primitives, not simulations.',
-    code: `rnix ps\n\nPID  STATE   AGENT   TOKENS\n 1   Running  analyst  1,204\n 2   Zombie   review  3,891`,
-    tag: 'Core',
-    tagColor: 'text-secondary bg-secondary/10',
+      'Each agent is a process with its own PID, state machine, FD table. IPC messaging, pipes, signals, and process groups for multi-agent collaboration.',
+    accentColor: 'var(--primary-container)',
   },
   {
     icon: FolderTree,
     title: 'Everything is a File',
     description:
-      'Tools → /dev/ devices. MCP → /mnt/ mounts. Agent state → /proc/ files. One unified interface replaces fragmented tool/service/state abstractions.',
-    code: `/proc/{pid}/status\n/dev/llm/claude\n/dev/fs\n/dev/shell`,
-    tag: 'VFS',
-    tagColor: 'text-secondary bg-secondary/10',
+      'LLMs, filesystem, shell, and MCP tools are unified as VFS devices. Open/Read/Write/Close for all resources.',
+    accentColor: 'var(--secondary-container)',
+  },
+  {
+    icon: Search,
+    title: 'strace for AI',
+    description:
+      'See every syscall an agent makes — what it read, what it wrote, where it went wrong. Debug in minutes, not days.',
+    accentColor: 'var(--tertiary-fixed-dim)',
+  },
+  {
+    icon: Brain,
+    title: 'Autonomous Reasoning',
+    description:
+      'Unified reasoning loop where LLM autonomously selects actions. Stem cell differentiation lets agents auto-specialize based on intent.',
+    accentColor: 'var(--primary-container)',
+  },
+  {
+    icon: Bug,
+    title: 'Interactive Debugging',
+    description:
+      'gdb-style debugger: attach, breakpoints, step, inspect context. Time-travel replay with fork-continue.',
+    accentColor: 'var(--secondary-container)',
   },
   {
     icon: FileCode2,
-    title: 'Skills as Packages',
-    description:
-      'SKILL.md follows the Agent Skills open standard (agentskills.io). Write once, share everywhere — compatible with 30+ AI tools in the ecosystem.',
-    code: `---\nname: code-analysis\nallowed-tools: /dev/fs /dev/shell\n---\n## Steps\n1. Read target file...`,
-    tag: 'Ecosystem',
-    tagColor: 'text-tertiary bg-tertiary/10',
-  },
-  {
-    icon: Layers,
-    title: '4-Layer Capability Model',
-    description:
-      'Process (runtime) → Agent (identity) → Skill (how-to) → VFS Device. Each layer has clear responsibilities. Skills define allowed-tools; agents aggregate permissions.',
-    code: `Process: PID 1\n  └─ Agent: code-analyst\n      └─ Skill: code-analysis\n          allowed-tools: /dev/fs /dev/shell\n      └─ VFS: /dev/llm /dev/fs /dev/shell`,
-    tag: 'Architecture',
-    tagColor: 'text-secondary bg-secondary/10',
-  },
-  {
-    icon: Zap,
     title: '45 Syscalls. One ABI.',
     description:
-      'A stable, versioned syscall interface — the "constitution" of the OS. 45 syscalls covering process management, IPC, VFS, signals, capabilities, and debugging.',
-    code: `Process: Spawn Kill Wait ListProcs\nContext: CtxAlloc CtxRead CtxWrite CtxFree\nVFS: Open Read Write Close Stat\nIPC/Signal: Send Recv Pipe\nDebug: SyscallEvent auto-recorded`,
-    tag: 'ABI',
-    tagColor: 'text-secondary bg-secondary/10',
+      'Stable, versioned syscall interface covering process, context, VFS, IPC, signals, and capabilities. The "constitution" of the OS.',
+    accentColor: 'var(--tertiary-fixed-dim)',
   },
 ];
 
@@ -69,48 +50,49 @@ export default function FeaturesSection() {
   const { ref, isInView } = useInView(0.08);
 
   return (
-    <section className="py-20 lg:py-28 section-padding" id="features">
-      <div className="section-container" ref={ref}>
-        <div className="max-w-2xl mb-16">
-          <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
-            OS-level primitives for AI agents
-          </h2>
-          <p className="text-on_surface_variant text-lg">
-            Not another wrapper. Rnix provides the foundational abstractions that frameworks
-            keep trying — and failing — to build at the app layer.
+    <section className="py-40 px-6 bg-surface-container-lowest" id="features">
+      <style>{`
+        .feature-card {
+          border: 1px solid rgba(59, 75, 55, 0.2);
+          transition: border-color 0.3s;
+        }
+        .feature-card:hover {
+          border-color: var(--card-accent);
+        }
+        .feature-card .feature-icon {
+          color: var(--card-accent);
+          background-color: color-mix(in srgb, var(--card-accent) 10%, transparent);
+          transition: transform 0.3s;
+        }
+        .feature-card:hover .feature-icon {
+          transform: scale(1.1);
+        }
+      `}</style>
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className="text-center mb-24">
+          <h2 className="font-headline text-5xl md:text-7xl font-bold mb-6">Built for Autonomy.</h2>
+          <p className="text-on-surface-variant max-w-2xl mx-auto">
+            OS-level primitives for AI agents. Not another wrapper — the real thing.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {FEATURES.map((feature, i) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className={`glass-card-hover p-6 flex flex-col min-w-0 ${i === 0 ? 'md:col-span-2' : ''} ${
-                  isInView ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
-                style={{ animationDelay: `${i * 100}ms` }}
+                className={`feature-card bg-surface-container p-10 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+                style={{
+                  animationDelay: `${i * 100}ms`,
+                  '--card-accent': feature.accentColor,
+                } as React.CSSProperties}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 bg-surface flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-secondary" />
-                  </div>
-                  <span
-                    className={`text-label-sm font-semibold tracking-wider uppercase px-2 py-1 ${feature.tagColor}`}
-                  >
-                    {feature.tag}
-                  </span>
+                <div className="feature-icon w-16 h-16 flex items-center justify-center mb-8">
+                  <Icon className="w-8 h-8" />
                 </div>
-
-                <h3 className="text-title-md font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-on_surface_variant text-body-md leading-relaxed mb-5 flex-1">
-                  {feature.description}
-                </p>
-
-                <div className="bg-surface p-3.5 font-mono text-body-sm leading-5 text-on_surface whitespace-pre min-w-0 overflow-hidden">
-                  {feature.code}
-                </div>
+                <h3 className="font-headline text-3xl font-bold mb-4 uppercase tracking-tighter">{feature.title}</h3>
+                <p className="text-on-surface-variant leading-relaxed">{feature.description}</p>
               </div>
             );
           })}

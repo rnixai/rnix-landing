@@ -37,21 +37,13 @@ function CopyButton({ text }: { text: string }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleCopy();
-    }
-  };
-
   return (
     <button
       onClick={handleCopy}
-      onKeyDown={handleKeyDown}
-      className="absolute top-3 right-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-surface text-on_surface_muted hover:text-secondary transition-colors focus-ring"
+      className="absolute top-3 right-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-surface-container text-gray-500 hover:text-secondary-container transition-colors focus-ring"
       aria-label="Copy code"
     >
-      {copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Copy className="w-3.5 h-3.5" />}
+      {copied ? <Check className="w-3.5 h-3.5 text-primary-container" /> : <Copy className="w-3.5 h-3.5" />}
     </button>
   );
 }
@@ -60,16 +52,16 @@ export default function GetStartedSection() {
   const { ref, isInView } = useInView(0.1);
 
   return (
-    <section className="py-24 lg:py-32 section-padding" id="get-started">
-      <div className="section-container" ref={ref}>
-        <div className="max-w-2xl mx-auto mb-16">
-          <p className="text-label-sm font-semibold tracking-widest uppercase text-secondary mb-3">
+    <section className="py-40 px-6" id="get-started">
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className="text-center mb-16">
+          <p className="text-xs font-semibold tracking-widest uppercase text-secondary-container mb-3 font-mono">
             Get Started
           </p>
-          <h2 className="font-display text-headline-md font-bold text-white mb-4 text-balance">
-            Up and running in 15 minutes
+          <h2 className="font-headline text-5xl md:text-6xl font-bold text-white mb-4 text-balance">
+            Get Started in 15 Minutes
           </h2>
-          <p className="text-on_surface_variant text-lg">
+          <p className="text-on-surface-variant text-lg">
             Prerequisites: Go 1.26+ installed. Supports multiple LLM providers out of the box.
           </p>
         </div>
@@ -78,29 +70,29 @@ export default function GetStartedSection() {
           {STEPS.map((item, i) => (
             <div
               key={item.step}
-              className={`flex gap-3 sm:gap-5 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+              className={`flex gap-5 ${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
               style={{ animationDelay: `${i * 150}ms` }}
             >
               <div className="flex flex-col items-center flex-shrink-0">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary flex items-center justify-center text-xs sm:text-sm font-bold text-surface">
+                <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-sm font-bold text-on-secondary-container">
                   {item.step}
                 </div>
                 {i < STEPS.length - 1 && (
-                  <div className="w-px flex-1 bg-surface_bright my-2" />
+                  <div className="w-px flex-1 bg-surface-bright my-2" />
                 )}
               </div>
               <div className="flex-1 min-w-0 pb-2">
-                <h3 className="text-title-md font-semibold text-white mb-1">{item.title}</h3>
-                <p className="text-sm text-on_surface_variant mb-4">{item.desc}</p>
+                <h3 className="text-lg font-semibold text-white mb-1 font-headline">{item.title}</h3>
+                <p className="text-sm text-on-surface-variant mb-4">{item.desc}</p>
                 <div className="relative terminal-window">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-surface_container">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-surface-container">
                     <div className="flex gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-tertiary/60" />
-                      <div className="w-2 h-2 rounded-full bg-tertiary/60" />
-                      <div className="w-2 h-2 rounded-full bg-primary/60" />
+                      <div className="w-2 h-2 rounded-full bg-tertiary-fixed-dim/60" />
+                      <div className="w-2 h-2 rounded-full bg-tertiary-fixed-dim/60" />
+                      <div className="w-2 h-2 rounded-full bg-primary-container/60" />
                     </div>
                   </div>
-                  <div className="p-3 sm:p-4 font-mono text-[11px] sm:text-xs leading-5 text-secondary overflow-x-auto whitespace-pre">
+                  <div className="p-4 font-mono text-xs leading-5 text-secondary-container overflow-x-auto whitespace-pre">
                     {item.code}
                   </div>
                   <CopyButton text={item.code} />
@@ -115,8 +107,7 @@ export default function GetStartedSection() {
             href={withUtm('https://docs.rnix.ai/', 'docs_get_started', 'cta')}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Read the full documentation (opens in new tab)"
-            className="inline-flex items-center gap-2 text-secondary hover:brightness-110 font-medium transition-colors focus-ring px-4 py-2"
+            className="inline-flex items-center gap-2 text-secondary-container hover:brightness-110 font-medium transition-colors focus-ring px-4 py-2"
           >
             <BookOpen className="w-4 h-4" />
             Read the full documentation
