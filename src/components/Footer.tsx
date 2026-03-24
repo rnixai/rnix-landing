@@ -13,7 +13,7 @@ const LINKS = {
     { label: 'Documentation', href: 'https://docs.rnix.ai/', external: true, utmContent: 'docs_footer' },
     { label: 'Quick Start', href: 'https://docs.rnix.ai/guide/quick-start', external: true, utmContent: 'quick_start_footer' },
     { label: 'Intent System', href: 'https://docs.rnix.ai/guide/intent-system', external: true, utmContent: 'intent_footer' },
-    { label: 'Autonomous Agents (OODA)', href: 'https://docs.rnix.ai/guide/autonomous-agents', external: true, utmContent: 'ooda_footer' },
+    { label: 'Autonomous Agents', href: 'https://docs.rnix.ai/guide/autonomous-agents', external: true, utmContent: 'autonomous_agents_footer' },
     { label: 'Syscall Reference', href: 'https://docs.rnix.ai/reference/', external: true, utmContent: 'syscall_footer' },
     { label: 'Agent Skills Standard', href: 'https://agentskills.io', external: true, utmContent: 'agentskills_footer' },
   ],

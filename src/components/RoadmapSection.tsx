@@ -54,8 +54,8 @@ const CAPABILITIES = [
   },
   {
     icon: Brain,
-    title: 'Autonomous Agents (OODA)',
-    items: ['Observe-Orient-Decide-Act loop', 'reasoning: ooda in agent.yaml', 'Stem cell differentiation + mission command'],
+    title: 'Autonomous Agents',
+    items: ['Unified reasoning loop — LLM selects action per step', 'Planning config (planning: true/false)', 'Stem cell differentiation + mission command'],
   },
   {
     icon: Plug,
@@ -101,7 +101,7 @@ export default function RoadmapSection() {
           </h2>
           <p className="text-midnight-400 text-lg">
             Rnix launches with the full capability stack: microkernel, VFS, IPC,
-            compose orchestration, intent system, autonomous agents (OODA),
+            compose orchestration, intent system, autonomous agents,
             skill ecosystem, supervisor trees, and monitoring.
           </p>
         </div>
