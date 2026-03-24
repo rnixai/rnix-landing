@@ -10,14 +10,33 @@ interface CompRow {
 }
 
 const COMPARISON: CompRow[] = [
-  { feature: 'Process lifecycle (spawn/kill/wait)', rnix: 'yes', langGraph: 'no', autoGen: 'partial', crewAI: 'no' },
-  { feature: 'Syscall-level tracing (strace)', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  // Architecture
+  { feature: 'Runtime model', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  { feature: 'OS-level process lifecycle', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
   { feature: 'Virtual filesystem (VFS)', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
-  { feature: 'Standard Skill format (Agent Skills)', rnix: 'yes', langGraph: 'partial', autoGen: 'no', crewAI: 'no' },
-  { feature: 'IPC / pipes between agents', rnix: 'yes', langGraph: 'partial', autoGen: 'partial', crewAI: 'partial' },
-  { feature: 'Declarative compose (YAML)', rnix: 'yes', langGraph: 'no', autoGen: 'partial', crewAI: 'partial' },
-  { feature: 'Supervisor auto-restart', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
   { feature: 'Zero-dependency binary', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  // Orchestration
+  { feature: 'Graph-based orchestration', rnix: 'no', langGraph: 'yes', autoGen: 'no', crewAI: 'no' },
+  { feature: 'Role-based agent teams', rnix: 'partial', langGraph: 'no', autoGen: 'no', crewAI: 'yes' },
+  { feature: 'DAG workflow (YAML)', rnix: 'yes', langGraph: 'partial', autoGen: 'partial', crewAI: 'partial' },
+  { feature: 'Conversational multi-agent', rnix: 'no', langGraph: 'no', autoGen: 'yes', crewAI: 'no' },
+  // Debugging & Observability
+  { feature: 'Syscall-level tracing', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  { feature: 'Step recording & replay', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  { feature: 'Checkpointing & time-travel', rnix: 'partial', langGraph: 'yes', autoGen: 'no', crewAI: 'no' },
+  { feature: 'Visual debugging dashboard', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  // State & Memory
+  { feature: 'Persistent state management', rnix: 'yes', langGraph: 'yes', autoGen: 'partial', crewAI: 'partial' },
+  { feature: 'Context per agent (isolated)', rnix: 'yes', langGraph: 'yes', autoGen: 'partial', crewAI: 'yes' },
+  // Enterprise
+  { feature: 'Enterprise compliance (SOC2/HIPAA)', rnix: 'no', langGraph: 'no', autoGen: 'yes', crewAI: 'yes' },
+  { feature: 'Azure / cloud-native integration', rnix: 'no', langGraph: 'partial', autoGen: 'yes', crewAI: 'yes' },
+  // Ecosystem
+  { feature: 'Standard skill format', rnix: 'yes', langGraph: 'partial', autoGen: 'no', crewAI: 'no' },
+  { feature: 'Multi-LLM provider support', rnix: 'yes', langGraph: 'yes', autoGen: 'yes', crewAI: 'yes' },
+  { feature: 'IPC / pipes between agents', rnix: 'yes', langGraph: 'no', autoGen: 'partial', crewAI: 'no' },
+  { feature: 'Supervisor auto-restart', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
+  { feature: 'Human-in-the-loop approval', rnix: 'partial', langGraph: 'yes', autoGen: 'yes', crewAI: 'yes' },
 ];
 
 const COMPETITORS = ['LangGraph', 'AutoGen', 'CrewAI'] as const;
@@ -47,9 +66,10 @@ export default function ComparisonSection() {
     <section className="py-40 px-6 bg-surface-container-lowest" id="comparison">
       <div className="max-w-7xl mx-auto" ref={ref}>
         <div className="text-center mb-24">
-          <h2 className="font-headline text-5xl md:text-7xl font-bold mb-6">Framework vs. Operating System</h2>
-          <p className="text-on-surface-variant max-w-2xl mx-auto">
-            Frameworks simulate OS capabilities at the app layer. Rnix provides them natively.
+          <h2 className="font-headline text-5xl md:text-7xl font-bold mb-6">OS vs. Frameworks</h2>
+          <p className="text-on-surface-variant max-w-3xl mx-auto">
+            LangGraph, AutoGen, and CrewAI are Python libraries. Rnix is an operating system.
+            Different architecture, different capabilities, different trade-offs.
           </p>
         </div>
 
@@ -119,12 +139,34 @@ export default function ComparisonSection() {
               <Check className="w-3.5 h-3.5 text-primary-container" /> Native support
             </div>
             <div className="flex items-center gap-1.5">
-              <Minus className="w-3.5 h-3.5 text-tertiary-fixed-dim" /> Partial / simulated
+              <Minus className="w-3.5 h-3.5 text-tertiary-fixed-dim" /> Partial / requires setup
             </div>
             <div className="flex items-center gap-1.5">
               <X className="w-3.5 h-3.5 text-gray-600" /> Not available
             </div>
           </div>
+        </div>
+
+        {/* Mobile card view */}
+        <div className="sm:hidden space-y-4">
+          {COMPETITORS.map((comp) => (
+            <div key={comp} className="glass-card p-4">
+              <h3 className="text-sm font-semibold text-white mb-3">{comp}</h3>
+              <div className="space-y-2">
+                {COMPARISON.filter(r => getCompetitorStatus(r, comp) === 'yes' || r.rnix === 'yes').slice(0, 5).map((row) => (
+                  <div key={row.feature} className="flex items-center justify-between text-xs">
+                    <span className="text-on-surface-variant truncate mr-2">{row.feature}</span>
+                    <div className="flex gap-2 flex-shrink-0">
+                      <span className="text-gray-500">Rnix</span>
+                      <StatusIcon status={row.rnix} />
+                      <span className="text-gray-500 ml-1">{comp.slice(0, 4)}</span>
+                      <StatusIcon status={getCompetitorStatus(row, comp)} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

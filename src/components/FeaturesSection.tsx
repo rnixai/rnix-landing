@@ -1,47 +1,68 @@
 import { useInView } from '../hooks/useInView';
-import { Cpu, FolderTree, Search, Brain, Bug, FileCode2 } from 'lucide-react';
+import { Cpu, FolderTree, Search, Brain, Bug, FileCode2, Monitor, Shield, Coins, Fingerprint } from 'lucide-react';
 
 const FEATURES = [
   {
     icon: Cpu,
     title: 'Everything is a Process',
     description:
-      'Each agent is a process with its own PID, state machine, FD table. IPC messaging, pipes, signals, and process groups for multi-agent collaboration.',
+      'Each agent is a process with its own PID, UUID v7, state machine, FD table. IPC messaging, pipes, signals, and process groups for multi-agent collaboration.',
     accentColor: 'var(--primary-container)',
   },
   {
     icon: FolderTree,
     title: 'Everything is a File',
     description:
-      'LLMs, filesystem, shell, and MCP tools are unified as VFS devices. Open/Read/Write/Close for all resources.',
+      'LLMs, filesystem, shell, and MCP tools are unified as VFS devices. Open/Read/Write/Close for all resources. 20+ LLM providers via OpenAI-compatible drivers.',
     accentColor: 'var(--secondary-container)',
+  },
+  {
+    icon: Monitor,
+    title: 'Visual Dashboard',
+    description:
+      'Multi-pane TUI with agent tree, timeline, heatmap, process detail, intent tree, security anomaly, and LLM conversation viewer. Three view modes.',
+    accentColor: 'var(--tertiary-fixed-dim)',
   },
   {
     icon: Search,
     title: 'strace for AI',
     description:
       'See every syscall an agent makes — what it read, what it wrote, where it went wrong. Debug in minutes, not days.',
-    accentColor: 'var(--tertiary-fixed-dim)',
+    accentColor: 'var(--primary-container)',
   },
   {
     icon: Brain,
     title: 'Autonomous Reasoning',
     description:
       'Unified reasoning loop where LLM autonomously selects actions. Stem cell differentiation lets agents auto-specialize based on intent.',
-    accentColor: 'var(--primary-container)',
+    accentColor: 'var(--secondary-container)',
   },
   {
     icon: Bug,
     title: 'Interactive Debugging',
     description:
-      'gdb-style debugger: attach, breakpoints, step, inspect context. Time-travel replay with fork-continue.',
+      'gdb-style debugger: attach, breakpoints, step, inspect context. Time-travel replay with fork-continue. Step recording for full execution history.',
+    accentColor: 'var(--tertiary-fixed-dim)',
+  },
+  {
+    icon: Coins,
+    title: 'Token Economy',
+    description:
+      'Budget pools, contract SLAs, agent reputation scoring, and skill synergy emergence. Optimize multi-agent resource allocation.',
+    accentColor: 'var(--primary-container)',
+  },
+  {
+    icon: Shield,
+    title: 'Adaptive Immune Security',
+    description:
+      'Behavioral monitoring, anomaly detection, threat memory, and capability migration. Configurable and disabled by default.',
     accentColor: 'var(--secondary-container)',
   },
   {
     icon: FileCode2,
-    title: '45 Syscalls. One ABI.',
+    title: '45+ Syscalls. One ABI.',
     description:
-      'Stable, versioned syscall interface covering process, context, VFS, IPC, signals, and capabilities. The "constitution" of the OS.',
+      'Stable, versioned syscall interface covering process, context, VFS, IPC, signals, capabilities, and supervisor. The "constitution" of the OS.',
     accentColor: 'var(--tertiary-fixed-dim)',
   },
 ];

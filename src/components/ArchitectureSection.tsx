@@ -15,20 +15,20 @@ const LAYERS = [
   },
   {
     label: 'Microkernel',
-    desc: 'Process Model / VFS / Context / IPC / 45-syscall ABI',
+    desc: 'Process Model (UUID v7) / VFS / Context / IPC / Step Recording / 50-syscall ABI',
     color: 'bg-surface-container',
     textColor: 'text-white',
     highlight: true,
   },
   {
     label: 'Driver Layer',
-    desc: '/dev/llm/claude  /dev/llm/cursor  /dev/fs  /dev/shell  /mnt/mcp/',
+    desc: '/dev/llm/claude  /dev/llm/cursor  /dev/llm/<provider>  /dev/fs  /dev/shell  /mnt/mcp/',
     color: 'bg-surface',
     textColor: 'text-on-surface',
   },
   {
     label: 'Host OS + Multi-LLM Providers',
-    desc: 'Go runtime / goroutines / channels / pluggable LLM backends',
+    desc: 'Go runtime / goroutines / channels / Claude / Cursor / OpenAI-compat (Ollama, Groq, DeepSeek)',
     color: 'bg-surface-container-lowest',
     textColor: 'text-on-surface-variant',
   },

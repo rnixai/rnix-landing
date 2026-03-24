@@ -14,23 +14,32 @@ import {
   RotateCcw,
   GitBranch,
   Brain,
+  Monitor,
+  Coins,
+  Fingerprint,
+  Timer,
+  Database,
 } from 'lucide-react';
 
 const CAPABILITIES = [
-  { icon: Cpu, title: 'Process Model', items: ['spawn / kill / wait / signal', 'Full lifecycle state machine', 'Process trees + zombie reaping'] },
-  { icon: FolderTree, title: 'Virtual Filesystem', items: ['/proc/ dynamic agent state', '/dev/ device routing', '/mnt/mcp/ service mounts'] },
+  { icon: Cpu, title: 'Process Model', items: ['spawn / kill / wait / signal', 'UUID v7 cross-session identity', 'Process trees + zombie reaping'] },
+  { icon: FolderTree, title: 'Virtual Filesystem', items: ['/proc/ dynamic agent state', '/dev/ device routing (incl. OpenAI compat)', '/mnt/mcp/ service mounts'] },
   { icon: Search, title: 'strace Debugging', items: ['Real-time syscall tracing', 'Params, returns, timing', 'Pinpoint bugs in minutes'] },
   { icon: FileCode2, title: 'Skills Ecosystem', items: ['Agent Skills open standard', 'SKILL.md progressive loading', 'rnix skill install / search / update'] },
   { icon: MessageSquare, title: 'IPC Communication', items: ['Send / Recv / Pipe syscalls', 'Process groups + broadcast', 'Unix-style pipe composition'] },
   { icon: Layers, title: 'Compose Orchestration', items: ['Declarative YAML workflows', 'DAG dependency scheduling', 'rnix compose up / down'] },
   { icon: GitBranch, title: 'Intent System', items: ['Declarative intent decomposition', 'rnix intent apply / status / list', 'Reconciler drives intent tree'] },
-  { icon: Brain, title: 'Autonomous Agents', items: ['Unified reasoning loop', 'Planning config (planning: true/false)', 'Stem cell differentiation'] },
+  { icon: Brain, title: 'Autonomous Agents', items: ['Unified reasoning loop (7 action types)', 'Planning config (planning: true/false)', 'Stem cell differentiation'] },
   { icon: Plug, title: 'MCP Integration', items: ['Mount external services', 'VFS path access to tools', '4-layer capability stack'] },
   { icon: RotateCcw, title: 'Supervisor Trees', items: ['one_for_one / one_for_all / rest_for_one', 'Automatic crash recovery', 'Init bootstrap sequence'] },
   { icon: Activity, title: 'Live Monitoring', items: ['rnix top real-time TUI', 'rnix log [think]/[tool]/[output]', 'Token budget management'] },
   { icon: TerminalSquare, title: 'AgentShell', items: ['Pipe: rnix -i \'spawn "A" | spawn "B"\'', 'Variables + environment passing', 'if-else + on-error control'] },
-  { icon: Package, title: '45 Syscalls', items: ['Stable, versioned ABI', 'Process + Context + VFS + IPC + Signal', 'Automatic SyscallEvent tracing'] },
-  { icon: ShieldCheck, title: 'Security Model', items: ['Skill-based permission whitelist', 'Capability grant / revoke / check', 'Device access control'] },
+  { icon: Monitor, title: 'Visual Dashboard', items: ['Multi-pane TUI (tree, timeline, heatmap)', '3 view modes (default/expanded/fullscreen)', 'History view + LLM conversation viewer'] },
+  { icon: Timer, title: 'Step Recording', items: ['Full execution history per process', 'NDJSON persistence (.rnix/data/steps/)', 'IPC: get_step_detail / list_steps'] },
+  { icon: Database, title: 'Token Economy', items: ['Budget pools + priority allocation', 'Contract SLAs + auto-evaluation', 'Agent reputation + synergy matrix'] },
+  { icon: ShieldCheck, title: 'Adaptive Immune', items: ['Behavioral anomaly detection', 'Threat signature memory', 'Configurable (disabled by default)'] },
+  { icon: Coins, title: '20+ LLM Providers', items: ['Claude CLI / Cursor CLI / OpenAI Compat', 'OpenAI / Gemini / Groq / DeepSeek / Mistral / Ollama', 'Provider fallback + health checks + OpenAI gateway'] },
+  { icon: Package, title: '50+ Syscalls', items: ['Stable, versioned ABI', 'Process + Context + VFS + IPC + Signal', 'Automatic SyscallEvent tracing'] },
 ];
 
 export default function RoadmapSection() {
@@ -46,7 +55,7 @@ export default function RoadmapSection() {
           <p className="text-on-surface-variant text-lg">
             Rnix launches with the full capability stack: microkernel, VFS, IPC,
             compose orchestration, intent system, autonomous agents,
-            skill ecosystem, supervisor trees, and monitoring.
+            skill ecosystem, dashboard, token economy, immune security, and monitoring.
           </p>
         </div>
 
