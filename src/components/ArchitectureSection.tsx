@@ -22,13 +22,13 @@ const LAYERS = [
   },
   {
     label: 'Driver Layer',
-    desc: '/dev/llm/claude  /dev/llm/cursor  /dev/llm/<provider>  /dev/fs  /dev/shell  /mnt/mcp/',
+    desc: '/dev/llm/*  /dev/fs  /dev/shell  /dev/memory/*  /dev/web  /dev/lsp  /dev/tasks  /dev/tty  /dev/cron  /mnt/mcp/*',
     color: 'bg-surface',
     textColor: 'text-on-surface',
   },
   {
     label: 'Host OS + Multi-LLM Providers',
-    desc: 'Go runtime / goroutines / channels / Claude / Cursor / OpenAI-compat (Ollama, Groq, DeepSeek)',
+    desc: 'Go runtime / goroutines / channels / Claude / Cursor / Qwen / OpenAI / Anthropic / Gemini / OpenAI-compat (Ollama, Groq, DeepSeek)',
     color: 'bg-surface-container-lowest',
     textColor: 'text-on-surface-variant',
   },

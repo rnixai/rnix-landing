@@ -27,6 +27,7 @@ const COMPARISON: CompRow[] = [
   { feature: 'Visual debugging dashboard', rnix: 'yes', langGraph: 'no', autoGen: 'no', crewAI: 'no' },
   // State & Memory
   { feature: 'Persistent state management', rnix: 'yes', langGraph: 'yes', autoGen: 'partial', crewAI: 'partial' },
+  { feature: 'Agent memory system', rnix: 'yes', langGraph: 'partial', autoGen: 'no', crewAI: 'no' },
   { feature: 'Context per agent (isolated)', rnix: 'yes', langGraph: 'yes', autoGen: 'partial', crewAI: 'yes' },
   // Enterprise
   { feature: 'Enterprise compliance (SOC2/HIPAA)', rnix: 'no', langGraph: 'no', autoGen: 'yes', crewAI: 'yes' },

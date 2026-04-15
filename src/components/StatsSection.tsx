@@ -3,7 +3,7 @@ import { useInView } from '../hooks/useInView';
 const STATS = [
   { value: '50+', label: 'Syscall ABI', detail: 'Process / Context / VFS / IPC / Signal', color: 'text-primary-container' },
   { value: '20+', label: 'LLM Providers', detail: 'OpenAI / Claude / Gemini / Groq / DeepSeek / Mistral / Ollama ...', color: 'text-secondary-container' },
-  { value: '9', label: 'VFS Devices', detail: '/dev/llm/* /dev/fs /dev/shell /proc/* /mnt/mcp/*', color: 'text-tertiary-fixed-dim' },
+  { value: '14', label: 'VFS Devices', detail: '/dev/llm/* /dev/fs /dev/shell /dev/memory/* /dev/web /dev/lsp /dev/tasks /dev/tty /dev/cron /proc/* /mnt/mcp/*', color: 'text-tertiary-fixed-dim' },
   { value: '5', label: 'Signal Types', detail: 'SIGTERM / SIGKILL / SIGINT / SIGPAUSE / SIGRESUME', color: 'text-primary-container' },
 ];
 

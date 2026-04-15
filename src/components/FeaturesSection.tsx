@@ -1,5 +1,5 @@
 import { useInView } from '../hooks/useInView';
-import { Cpu, FolderTree, Search, Brain, Bug, FileCode2, Monitor, Shield, Coins, Fingerprint } from 'lucide-react';
+import { Cpu, FolderTree, Search, Brain, Bug, FileCode2, Monitor, Shield, Coins, Fingerprint, Database } from 'lucide-react';
 
 const FEATURES = [
   {
@@ -13,7 +13,7 @@ const FEATURES = [
     icon: FolderTree,
     title: 'Everything is a File',
     description:
-      'LLMs, filesystem, shell, and MCP tools are unified as VFS devices. Open/Read/Write/Close for all resources. 20+ LLM providers via OpenAI-compatible drivers.',
+      'LLMs, filesystem, shell, memory, web, LSP, and MCP tools are unified as VFS devices. Open/Read/Write/Close for all resources. 14 device types, 7 driver types.',
     accentColor: 'var(--secondary-container)',
   },
   {
@@ -36,6 +36,13 @@ const FEATURES = [
     description:
       'Unified reasoning loop where LLM autonomously selects actions. Stem cell differentiation lets agents auto-specialize based on intent.',
     accentColor: 'var(--secondary-container)',
+  },
+  {
+    icon: Database,
+    title: 'Agent Memory',
+    description:
+      'Persistent knowledge across sessions — commit facts, recall by search, build user profiles. Dual-scope storage with security scanning and async writeback.',
+    accentColor: 'var(--tertiary-fixed-dim)',
   },
   {
     icon: Bug,
